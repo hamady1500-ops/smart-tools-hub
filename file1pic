@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الأدوات الذكية | Smart Tools Hub</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #3498db; --light: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); margin: 0; padding: 20px; text-align: center; }
+        header { background: var(--primary); color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .tool-box { border: 2px dashed var(--secondary); padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        input[type="file"] { margin: 20px 0; }
+        button { background: var(--secondary); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #2980b9; }
+        canvas { display: none; }
+        .download-link { display: none; margin-top: 20px; text-decoration: none; color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>منصة الأدوات المتكاملة</h1>
+    <p>أدوات هندسية وتقنية سريعة ومجانية</p>
+</header>
+
+<div class="container">
+    <div class="tool-box" id="image-tool">
+        <h2>📷 محول ومصغر حجم الصور</h2>
+        <p>اختر صورة لتحويلها إلى JPG وتقليل حجمها</p>
+        <input type="file" id="upload" accept="image/*">
+        <br>
+        <button onclick="processImage()">تحويل ومعالجة الصورة</button>
+        <br>
+        <canvas id="canvas"></canvas>
+        <a id="download" class="download-link">✅ تحميل الصورة المعالجة</a>
+    </div>
+</div>
+
+<script>
+    function processImage() {
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const downloadLink = document.getElementById('download');
+        
+        if (upload.files && upload.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // تحويل الصورة إلى JPG بجودة 70% لتقليل الحجم
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    downloadLink.href = dataUrl;
+                    downloadLink.download = "processed-image-by-me.jpg";
+                    downloadLink.style.display = "block";
+                    downloadLink.innerText = "تمت المعالجة! اضغط هنا للتحميل";
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(upload.files[0]);
+        } else {
+            alert("من فضلك اختر صورة أولاً");
+        }
+    }
+</script>
+
+</body>
+</html>
