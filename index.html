@@ -3,280 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة المِعيار للحلول الذكية | 13 أداة احترافية</title>
+    <title>منصة المِعيار الذكية | المهندس محمد الغنودي</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f1f5f9; --w: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; }
-        header { background: linear-gradient(135deg, var(--p) 0%, #1e293b 100%); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--s); }
-        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: var(--w); padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
-        .card:hover { transform: translateY(-5px); border-color: var(--s); }
-        .card h3 { color: var(--p); margin-top: 0; font-size: 1.25rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        .tag { position: absolute; top: 10px; left: 10px; font-size: 0.7rem; background: #f1f5f9; padding: 2px 8px; border-radius: 10px; color: var(--s); font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; }
-        button { background: var(--s); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
-        button:hover { filter: brightness(1.1); }
-        .btn-sc { background: var(--sc); }
-        .res { background: #f8fafc; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px dashed var(--s); text-align: center; font-weight: 600; }
-        footer { background: var(--p); color: white; padding: 40px; text-align: center; margin-top: 60px; }
+        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f8fafc; --card: #ffffff; --txt: #334155; --border: #e2e8f0; }
+        [data-theme="dark"] { --p: #020617; --bg: #0f172a; --card: #1e293b; --txt: #f1f5f9; --border: #334155; }
         
-        /* منطقة المعالجة المخفية للـ PDF لدعم العربية */
-        #pdf-render { width: 700px; padding: 50px; background: white; color: black; position: absolute; left: -9999px; text-align: right; direction: rtl; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--txt); margin: 0; transition: 0.3s; line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--p) 0%, #1e40af 100%); color: white; padding: 50px 20px; text-align: center; position: relative; border-bottom: 4px solid var(--s); }
+        
+        .theme-toggle { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.1); border: 1px solid white; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; z-index: 100; }
+
+        .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: -25px auto 30px; flex-wrap: wrap; padding: 0 10px; }
+        .tab-btn { background: var(--card); border: 1px solid var(--border); color: var(--txt); padding: 12px 20px; border-radius: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+        .tab-btn.active { background: var(--s); color: white; border-color: var(--s); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; min-height: 600px; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .card h3 { color: var(--s); margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--txt); box-sizing: border-box; }
+        button { background: var(--s); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        
+        .res { display: none; margin-top: 15px; padding: 15px; border-radius: 10px; background: rgba(37, 99, 235, 0.05); border: 1px dashed var(--s); font-weight: bold; text-align: center; }
+
+        /* أيقونات التواصل الاجتماعي */
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
+        .social-fb { background: #1877f2; } .social-li { background: #0a66c2; } .social-in { background: #e4405f; }
+        .social-links a:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+        footer { background: var(--p); color: white; padding: 40px 20px; text-align: center; margin-top: 100px; }
+        #pdf-hidden { position: absolute; left: -9999px; width: 700px; background: white; color: black; padding: 50px; direction: rtl; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>مركز المِعيار للأدوات الذكية</h1>
-    <p>المنصة الشاملة: 13 أداة تعمل بدقة وسرعة مع دعم كامل للغة العربية</p>
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> تبديل المظهر</button>
+    <h1>منصة المِعيار للحلول الرقمية</h1>
+    <p>هندسة، مال، وتقنية.. برؤية المهندس محمد الغنودي</p>
 </header>
 
+<div class="nav-tabs">
+    <button class="tab-btn active" onclick="openTab(event, 'tools-tab')"><i class="fas fa-tools"></i> الأدوات العامة</button>
+    <button class="tab-btn" onclick="openTab(event, 'eng-tab')"><i class="fas fa-solar-panel"></i> هندسة وطاقة</button>
+    <button class="tab-btn" onclick="openTab(event, 'about-tab')"><i class="fas fa-id-badge"></i> من نحن</button>
+    <button class="tab-btn" onclick="openTab(event, 'contact-tab')"><i class="fas fa-envelope"></i> اتصل بنا</button>
+</div>
+
 <div class="container">
-    <div class="grid">
-        
-        <div class="card">
-            <span class="tag">مهني</span>
-            <h3>📄 صانع CV احترافي</h3>
-            <input type="text" id="cvName" placeholder="الاسم الكامل">
-            <input type="text" id="cvJob" placeholder="المسمى الوظيفي">
-            <textarea id="cvExp" placeholder="الخبرات والنبذة الشخصية..."></textarea>
-            <button onclick="saveCV()">تحميل السيرة الذاتية PDF</button>
+    
+    <div id="tools-tab" class="tab-content" style="display: grid;">
+        <div class="tools-grid">
+            <div class="card">
+                <h3><i class="fas fa-user-tie"></i> صانع السيرة الذاتية PDF</h3>
+                <input type="text" id="cvName" placeholder="الاسم الكامل">
+                <input type="text" id="cvJob" placeholder="المسمى الوظيفي">
+                <textarea id="cvExp" rows="3" placeholder="نبذة عن خبراتك..."></textarea>
+                <button onclick="saveCV()">تحميل ملف CV</button>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-coins"></i> حاسبة الزكاة والذهب</h3>
+                <input type="number" id="goldP" placeholder="سعر الجرام اليوم">
+                <input type="number" id="goldW" placeholder="الوزن (جرام)">
+                <button onclick="calcZakat()" style="background:var(--sc)">احسب الزكاة</button>
+                <div id="zakatRes" class="res"></div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-money-bill-wave"></i> سعر الصرف (الموازي)</h3>
+                <input type="number" id="currVal" placeholder="المبلغ">
+                <input type="number" id="parRate" placeholder="سعر الصرف الحالي (مثلاً 7.10)">
+                <button onclick="doParallel()">تحويل فوري</button>
+                <div id="currRes" class="res"></div>
+            </div>
         </div>
-
-        <div class="card">
-            <span class="tag">ملفات</span>
-            <h3>📄 محول النصوص إلى PDF</h3>
-            <textarea id="txtToPdfIn" placeholder="اكتب موضوعك باللغة العربية هنا..."></textarea>
-            <button onclick="saveTxtPDF()" class="btn-sc">حفظ كملف PDF</button>
-        </div>
-
-        <div class="card">
-            <span class="tag">ملفات</span>
-            <h3>🖼️ تحويل صورة إلى PDF</h3>
-            <input type="file" id="imgToPdfIn" accept="image/*">
-            <button onclick="saveImgPDF()">تحويل وتحميل PDF</button>
-        </div>
-
-        <div class="card">
-            <span class="tag">صحة</span>
-            <h3>⚖️ حاسبة كتلة الجسم (BMI)</h3>
-            <input type="number" id="bmiW" placeholder="الوزن (كجم)">
-            <input type="number" id="bmiH" placeholder="الطول (سم)">
-            <button onclick="calcBMI()" class="btn-sc">فحص الحالة</button>
-            <div id="bmiRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">مالي</span>
-            <h3>💰 حاسبة القروض والتقسيط</h3>
-            <input type="number" id="loanA" placeholder="قيمة القرض">
-            <input type="number" id="loanR" placeholder="الفائدة %">
-            <input type="number" id="loanT" placeholder="المدة (شهور)">
-            <button onclick="calcLoan()">حساب القسط</button>
-            <div id="loanRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">أدوات</span>
-            <h3>📝 عداد الكلمات والحروف</h3>
-            <textarea id="wordIn" placeholder="الصق النص هنا..." oninput="countWords()"></textarea>
-            <div id="wordRes" class="res" style="display:block; border:none; background:none;">الحروف: 0 | الكلمات: 0</div>
-        </div>
-
-        <div class="card">
-            <span class="tag">أمان</span>
-            <h3>🔒 مولد كلمات سر قوية</h3>
-            <button onclick="genPass()">توليد كلمة سر</button>
-            <div id="passRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">تقني</span>
-            <h3>🔗 محول الرابط لـ QR</h3>
-            <input type="text" id="qrIn" placeholder="ضع الرابط هنا">
-            <button onclick="doQR()" class="btn-sc">توليد الرمز</button>
-            <div id="qrRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">وسائط</span>
-            <h3>📷 ضاغط الصور الاحترافي</h3>
-            <input type="file" id="compIn" accept="image/*">
-            <button onclick="doComp()">ضغط وتحميل</button>
-            <div id="compRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">مالي</span>
-            <h3>💱 محول العملات (ليبيا)</h3>
-            <input type="number" id="currVal" placeholder="المبلغ">
-            <select id="currF"><option value="USD">دولار</option><option value="LYD">دينار</option></select>
-            <button onclick="doCurr()" class="btn-sc">تحويل فوري</button>
-            <div id="currRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">لغة</span>
-            <h3>✍️ المدقق اللغوي الذكي</h3>
-            <textarea id="gramIn" placeholder="أدخل النص العربي..."></textarea>
-            <button onclick="doGrammar()">تدقيق وتنسيق</button>
-            <div id="gramRes" class="res" style="text-align:right"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">هندسة</span>
-            <h3>⚡ الحاسبة الهندسية</h3>
-            <select id="engM"><option value="o">قانون أوم</option><option value="w">طول الموجة</option></select>
-            <input type="number" id="ev1" placeholder="القيمة 1">
-            <input type="number" id="ev2" placeholder="القيمة 2">
-            <button onclick="doEng()" class="btn-sc">حساب النتيجة</button>
-            <div id="engRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">تعليم</span>
-            <h3>🎓 حاسبة المعدل GPA</h3>
-            <input type="number" id="gpaS" placeholder="مجموع النقاط">
-            <input type="number" id="gpaH" placeholder="إجمالي الساعات">
-            <button onclick="doGPA()">حساب المعدل</button>
-            <div id="gpaRes" class="res"></div>
-        </div>
-
     </div>
+
+    <div id="eng-tab" class="tab-content">
+        <div class="tools-grid">
+            <div class="card">
+                <h3><i class="fas fa-sun"></i> تقدير منظومة الطاقة الشمسية</h3>
+                <input type="number" id="solarLoad" placeholder="إجمالي الحمل المطلوب (Watt)">
+                <input type="number" id="sunHours" placeholder="ساعات الذروة (ليبيا غالباً 5)" value="5">
+                <button onclick="calcSolar()">تقدير المنظومة</button>
+                <div id="solarRes" class="res" style="text-align:right; font-size:0.9rem"></div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-bolt"></i> حاسبة القدرة والأحمال</h3>
+                <input type="number" id="loadA" placeholder="التيار (Ampere)">
+                <input type="number" id="loadV" placeholder="الجهد (Volt)" value="220">
+                <button onclick="calcPower()">حساب الواط</button>
+                <div id="pRes" class="res"></div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-ruler-combined"></i> الحاسبة الهندسية</h3>
+                <select id="engM"><option value="o">قانون أوم</option><option value="w">طول الموجة</option></select>
+                <input type="number" id="ev1" placeholder="القيمة 1">
+                <input type="number" id="ev2" placeholder="القيمة 2">
+                <button onclick="doEng()">النتيجة</button>
+                <div id="engRes" class="res"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-tab" class="tab-content">
+        <div class="card" style="text-align:center; max-width:800px; margin:0 auto;">
+            <h2 style="color:var(--s)">المهندس محمد الغنودي</h2>
+            <p>مطور منصة المِعيار، مهندس كهرباء (اتصالات) وباحث أكاديمي من مدينة درنة.</p>
+            <p style="font-size:0.9rem; color:#64748b">أسعى من خلال هذه المنصة لتقديم أدوات دقيقة تخدم المجتمع التقني والإنساني في ليبيا.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/mohammedalgannoudi?mibextid=wwXIfr" target="_blank" class="social-fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/eng-mohammed-youssef-al-ghannudi-503271214" target="_blank" class="social-li"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/mohammad_algannude" target="_blank" class="social-in"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-tab" class="tab-content">
+        <div class="card" style="max-width:500px; margin:0 auto;">
+            <h3>تواصل مباشر</h3>
+            <input type="text" placeholder="الاسم">
+            <textarea rows="4" placeholder="رسالتك..."></textarea>
+            <button onclick="alert('تم الاستلام، شكراً لك!')">إرسال</button>
+        </div>
+    </div>
+
 </div>
 
-<div id="pdf-render">
-    <h2 id="p-title" style="text-align:center; border-bottom: 2px solid #000; padding-bottom:10px;"></h2>
-    <div id="p-body" style="font-size:18px; margin-top:20px; white-space: pre-wrap;"></div>
-</div>
+<div id="pdf-hidden"><h1 id="p-title"></h1><div id="p-body"></div></div>
 
 <footer>
-    <p>منصة المِعيار - تطوير المهندس <strong>محمد الغنودي</strong></p>
-    <div style="opacity:0.6; font-size:13px;">© 2026 مركز المِعيار للحلول الذكية - درنة، ليبيا</div>
+    <p><strong>منصة المِعيار الذكية</strong></p>
+    <p>بصمة تقنية من درنة، ليبيا 2026</p>
+    <div class="social-links" style="margin-bottom:20px;">
+        <a href="https://www.facebook.com/mohammedalgannoudi?mibextid=wwXIfr" target="_blank" class="social-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/in/eng-mohammed-youssef-al-ghannudi-503271214" target="_blank" class="social-li"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/mohammad_algannude" target="_blank" class="social-in"><i class="fab fa-instagram"></i></a>
+    </div>
 </footer>
 
-<canvas id="cvs" style="display:none;"></canvas>
-
 <script>
-    // وظيفة التحميل لـ PDF تدعم العربية
-    async function downloadAsPDF(title, content, fileName) {
-        document.getElementById('p-title').innerText = title;
-        document.getElementById('p-body').innerText = content;
-        const element = document.getElementById('pdf-render');
-        const opt = { margin: 15, filename: fileName, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
-        await html2pdf().set(opt).from(element).save();
+    function openTab(e, t) {
+        let c = document.getElementsByClassName("tab-content");
+        for(let i=0; i<c.length; i++) c[i].style.display = "none";
+        document.getElementById(t).style.display = (t.includes('tab') && t!=='about-tab' && t!=='contact-tab') ? "grid" : "block";
+        let b = document.getElementsByClassName("tab-btn");
+        for(let i=0; i<b.length; i++) b[i].classList.remove("active");
+        e.currentTarget.classList.add("active");
     }
 
-    function saveCV() {
-        const n = document.getElementById('cvName').value;
-        const j = document.getElementById('cvJob').value;
-        const e = document.getElementById('cvExp').value;
+    function toggleTheme() {
+        let b = document.body;
+        let d = b.getAttribute('data-theme') === 'dark';
+        b.setAttribute('data-theme', d ? 'light' : 'dark');
+    }
+
+    async function saveCV() {
+        const n = document.getElementById('cvName').value, j = document.getElementById('cvJob').value, e = document.getElementById('cvExp').value;
         if(!n) return alert("أدخل الاسم");
-        downloadAsPDF("السيرة الذاتية", `الاسم: ${n}\nالوظيفة: ${j}\n\nالخبرات:\n${e}`, "Almiyar_CV.pdf");
+        document.getElementById('p-title').innerText = "السيرة الذاتية";
+        document.getElementById('p-body').innerText = `الاسم: ${n}\nالوظيفة: ${j}\n\nالخبرات:\n${e}`;
+        await html2pdf().set({margin:15, filename:'CV_Almiyar.pdf'}).from(document.getElementById('pdf-hidden')).save();
     }
 
-    function saveTxtPDF() {
-        const t = document.getElementById('txtToPdfIn').value;
-        if(!t) return alert("أدخل نصاً");
-        downloadAsPDF("مستند نصي", t, "Almiyar_Document.pdf");
+    function calcSolar() {
+        const load = document.getElementById('solarLoad').value;
+        const hours = document.getElementById('sunHours').value;
+        if(!load) return;
+        const panels = Math.ceil((load * 1.2) / 450); // افتراض لوح 450 واط
+        const inv = Math.ceil(load / 1000) + 1;
+        const res = document.getElementById('solarRes');
+        res.innerHTML = `التقدير الأولي لطلبك:<br>• عدد الألواح (450W): حوالي ${panels} لوح<br>• حجم العاكس (Inverter): ${inv} KVA<br>• البطاريات المقترحة: منظومة 24V أو 48V حسب الاستهلاك المسائي.`;
+        res.style.display = "block";
     }
 
-    function saveImgPDF() {
-        const f = document.getElementById('imgToPdfIn').files[0];
-        const r = new FileReader();
-        r.onload = (e) => {
-            const html = `<div style="text-align:center"><img src="${e.target.result}" style="max-width:100%"></div>`;
-            html2pdf().from(html).save("Almiyar_Image.pdf");
-        };
-        r.readAsDataURL(f);
+    function calcZakat() {
+        const p = document.getElementById('goldP').value, w = document.getElementById('goldW').value, r = document.getElementById('zakatRes');
+        const z = (p*w >= p*85) ? (p*w*0.025).toFixed(2) : 0;
+        r.innerText = z > 0 ? `الزكاة: ${z} دينار` : "لم يبلغ النصاب";
+        r.style.display = "block";
     }
 
-    function calcBMI() {
-        const w = parseFloat(document.getElementById('bmiW').value);
-        const h = parseFloat(document.getElementById('bmiH').value)/100;
-        const bmi = (w/(h*h)).toFixed(1);
-        document.getElementById('bmiRes').innerHTML = `الكتلة: ${bmi}`;
-        document.getElementById('bmiRes').style.display="block";
+    function doParallel() {
+        const v = document.getElementById('currVal').value, r = document.getElementById('parRate').value;
+        document.getElementById('currRes').innerText = `النتيجة: ${(v*r).toFixed(2)} دينار`;
+        document.getElementById('currRes').style.display = "block";
     }
 
-    function calcLoan() {
-        const a = parseFloat(document.getElementById('loanA').value);
-        const r = parseFloat(document.getElementById('loanR').value)/100/12;
-        const t = parseFloat(document.getElementById('loanT').value);
-        const m = (a * r) / (1 - Math.pow(1+r, -t));
-        document.getElementById('loanRes').innerHTML = `القسط: ${m.toFixed(2)}`;
-        document.getElementById('loanRes').style.display="block";
-    }
-
-    function countWords() {
-        const t = document.getElementById('wordIn').value;
-        document.getElementById('wordRes').innerText = `الحروف: ${t.length} | الكلمات: ${t.trim().split(/\s+/).length}`;
-    }
-
-    function genPass() {
-        const p = Math.random().toString(36).slice(-10).toUpperCase();
-        document.getElementById('passRes').innerText = p;
-        document.getElementById('passRes').style.display="block";
-    }
-
-    function doQR() {
-        const v = document.getElementById('qrIn').value;
-        document.getElementById('qrRes').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${v}" />`;
-        document.getElementById('qrRes').style.display="block";
-    }
-
-    function doComp() {
-        const f = document.getElementById('compIn').files[0];
-        const r = new FileReader();
-        r.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                const c = document.getElementById('cvs');
-                c.width = img.width; c.height = img.height;
-                c.getContext('2d').drawImage(img, 0, 0);
-                c.toBlob(b => {
-                    const u = URL.createObjectURL(b);
-                    const l = document.createElement('a');
-                    l.href = u; l.download = "Compressed.jpg"; l.click();
-                }, 'image/jpeg', 0.5);
-            };
-            img.src = e.target.result;
-        };
-        r.readAsDataURL(f);
-    }
-
-    function doCurr() {
-        const a = document.getElementById('currVal').value;
-        const f = document.getElementById('currF').value;
-        const res = f === 'USD' ? a * 4.88 : a / 4.88;
-        document.getElementById('currRes').innerText = res.toFixed(2);
-        document.getElementById('currRes').style.display="block";
-    }
-
-    function doGrammar() {
-        const t = document.getElementById('gramIn').value;
-        document.getElementById('gramRes').innerText = t.trim().replace(/\s+/g, ' ');
-        document.getElementById('gramRes').style.display="block";
+    function calcPower() {
+        const a = document.getElementById('loadA').value, v = document.getElementById('loadV').value;
+        document.getElementById('pRes').innerText = `القدرة: ${a*v} واط`;
+        document.getElementById('pRes').style.display = "block";
     }
 
     function doEng() {
-        const m = document.getElementById('engM').value;
-        const v1 = parseFloat(document.getElementById('ev1').value);
-        const v2 = parseFloat(document.getElementById('ev2').value);
-        let r = m === 'o' ? v1 * v2 : 300 / v1;
-        document.getElementById('engRes').innerText = r.toFixed(2);
-        document.getElementById('engRes').style.display="block";
-    }
-
-    function doGPA() {
-        const s = document.getElementById('gpaS').value;
-        const h = document.getElementById('gpaH').value;
-        document.getElementById('gpaRes').innerText = (s/h).toFixed(2);
-        document.getElementById('gpaRes').style.display="block";
+        const m = document.getElementById('engM').value, v1 = document.getElementById('ev1').value, v2 = document.getElementById('ev2').value;
+        const res = m === 'o' ? v1*v2 : 300/v1;
+        document.getElementById('engRes').innerText = `النتيجة: ${res.toFixed(2)}`;
+        document.getElementById('engRes').style.display = "block";
     }
 </script>
 </body>
