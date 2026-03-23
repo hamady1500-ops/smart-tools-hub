@@ -4,68 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة الأدوات الذكية | Smart Tools Hub</title>
+    <meta name="description" content="منصة مجانية لتحويل الملفات، معالجة الصور، والحسابات الهندسية. أدوات سريعة للمصممين والمهندسين.">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+
     <style>
-        :root { --primary: #2c3e50; --secondary: #3498db; --light: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); margin: 0; padding: 20px; text-align: center; }
-        header { background: var(--primary); color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .tool-box { border: 2px dashed var(--secondary); padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        input[type="file"] { margin: 20px 0; }
-        button { background: var(--secondary); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        :root { --primary: #2c3e50; --secondary: #3498db; --accent: #27ae60; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--secondary); }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        
+        /* تصميم الشبكة للأدوات */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        
+        /* عناصر الإدخال */
+        input, select, button { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
+        button { background: var(--secondary); color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
         button:hover { background: #2980b9; }
-        canvas { display: none; }
-        .download-link { display: none; margin-top: 20px; text-decoration: none; color: green; font-weight: bold; }
+        .btn-green { background: var(--accent); }
+        .btn-green:hover { background: #219150; }
+
+        .result-area { background: #eef2f7; padding: 15px; border-radius: 8px; margin-top: 10px; display: none; font-weight: bold; font-size: 14px; word-break: break-all; }
+        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>منصة الأدوات المتكاملة</h1>
-    <p>أدوات هندسية وتقنية سريعة ومجانية</p>
+    <h1>🚀 منصة الأدوات الشاملة</h1>
+    <p>كل ما تحتاجه من أدوات تقنية وهندسية في متصفحك مباشرة</p>
 </header>
 
 <div class="container">
-    <div class="tool-box" id="image-tool">
-        <h2>📷 محول ومصغر حجم الصور</h2>
-        <p>اختر صورة لتحويلها إلى JPG وتقليل حجمها</p>
-        <input type="file" id="upload" accept="image/*">
-        <br>
-        <button onclick="processImage()">تحويل ومعالجة الصورة</button>
-        <br>
-        <canvas id="canvas"></canvas>
-        <a id="download" class="download-link">✅ تحميل الصورة المعالجة</a>
+    <div class="tools-grid">
+        
+        <div class="card">
+            <h3>📷 معالجة الصور الذكية</h3>
+            <p>ضغط الصور وتحويلها إلى JPG لتقليل مساحة التخزين.</p>
+            <input type="file" id="imgInput" accept="image/*">
+            <button onclick="handleImage()">تحويل وضغط الصورة</button>
+            <div id="imgStatus" class="result-area"></div>
+            <a id="imgDownload" style="display:none; color: var(--accent); font-weight: bold; text-decoration: none; display: block; margin-top:10px;">⬇️ تحميل الصورة المعالجة</a>
+        </div>
+
+        <div class="card">
+            <h3>📄 تحويل Word إلى PDF</h3>
+            <p>حول ملفات Docx إلى PDF بسرعة فائقة (تجريبي).</p>
+            <input type="file" id="wordInput" accept=".docx">
+            <button onclick="convertWordToPdf()" class="btn-green">بدء التحويل</button>
+            <div id="wordStatus" class="result-area"></div>
+        </div>
+
+        <div class="card">
+            <h3>✍️ عداد وتنسيق النصوص</h3>
+            <p>حساب الكلمات، الحروف، وتنظيف النص من الفراغات.</p>
+            <textarea id="textInput" style="width:100%; height:80px; padding:10px; border-radius:8px; border:1px solid #ddd;" placeholder="أدخل النص هنا..."></textarea>
+            <button onclick="processText()">تحليل النص</button>
+            <div id="textResult" class="result-area"></div>
+        </div>
+
+        <div class="card">
+            <h3>⚡ حاسبة هندسية (Ohm's Law)</h3>
+            <p>احسب الجهد، التيار، أو المقاومة بدقة مهنية.</p>
+            <input type="number" id="volt" placeholder="الجهد (V)">
+            <input type="number" id="amp" placeholder="التيار (A)">
+            <button onclick="calcOhm()">احسب القدرة (Watt)</button>
+            <div id="ohmResult" class="result-area"></div>
+        </div>
+
     </div>
 </div>
 
+<footer>
+    <p>تم التطوير بواسطة المهندس محمد - منصة أدوات 2026</p>
+    <p>جميع العمليات تتم في متصفحك، نحن لا نخزن ملفاتك لضمان خصوصيتك.</p>
+</footer>
+
 <script>
-    function processImage() {
-        const upload = document.getElementById('upload');
-        const canvas = document.getElementById('canvas');
-        const downloadLink = document.getElementById('download');
-        
-        if (upload.files && upload.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    
-                    // تحويل الصورة إلى JPG بجودة 70% لتقليل الحجم
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-                    
-                    downloadLink.href = dataUrl;
-                    downloadLink.download = "processed-image-by-me.jpg";
-                    downloadLink.style.display = "block";
-                    downloadLink.innerText = "تمت المعالجة! اضغط هنا للتحميل";
-                }
-                img.src = event.target.result;
-            }
-            reader.readAsDataURL(upload.files[0]);
-        } else {
-            alert("من فضلك اختر صورة أولاً");
+    // --- أداة الصور ---
+    function handleImage() {
+        const input = document.getElementById('imgInput');
+        if(!input.files[0]) return alert("اختر صورة!");
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width; canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                const data = canvas.toDataURL('image/jpeg', 0.6); // ضغط 60%
+                const link = document.getElementById('imgDownload');
+                link.href = data;
+                link.download = "smart-tool-image.jpg";
+                link.style.display = "block";
+                document.getElementById('imgStatus').innerText = "تمت المعالجة بنجاح!";
+                document.getElementById('imgStatus').style.display = "block";
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    // --- أداة Word to PDF ---
+    async function convertWordToPdf() {
+        const input = document.getElementById('wordInput');
+        if(!input.files[0]) return alert("اختر ملف Word!");
+        const status = document.getElementById('wordStatus');
+        status.innerText = "جاري المعالجة... يرجى الانتظار";
+        status.style.display = "block";
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            const arrayBuffer = e.target.result;
+            mammoth.convertToHtml({arrayBuffer: arrayBuffer})
+            .then(result => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text(result.value.replace(/<[^>]*>/g, ''), 10, 10);
+                doc.save("converted-file.pdf");
+                status.innerText = "✅ اكتمل التحويل وتم تحميل الملف!";
+            });
+        };
+        reader.readAsArrayBuffer(input.files[0]);
+    }
+
+    // --- أداة النصوص ---
+    function processText() {
+        const txt = document.getElementById('textInput').value;
+        const words = txt.trim().split(/\s+/).filter(w => w.length > 0).length;
+        const chars = txt.length;
+        const res = document.getElementById('textResult');
+        res.innerHTML = `عدد الكلمات: ${words} <br> عدد الحروف: ${chars}`;
+        res.style.display = "block";
+    }
+
+    // --- أداة هندسية ---
+    function calcOhm() {
+        const v = document.getElementById('volt').value;
+        const a = document.getElementById('amp').value;
+        const res = document.getElementById('ohmResult');
+        if(v && a) {
+            res.innerText = `القدرة الكهربائية: ${v * a} Watt`;
+            res.style.display = "block";
         }
     }
 </script>
