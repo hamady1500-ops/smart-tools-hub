@@ -9,130 +9,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f8fafc; --card: #ffffff; --txt: #334155; --border: #e2e8f0; }
-        [data-theme="dark"] { --p: #020617; --bg: #0f172a; --card: #1e293b; --txt: #f1f5f9; --border: #334155; }
+        :root { 
+            --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f8fafc; --card: #ffffff; --txt: #334155; --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --p: #020617; --bg: #0f172a; --card: #1e293b; --txt: #f1f5f9; --border: #334155;
+        }
         
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--txt); margin: 0; transition: 0.3s; line-height: 1.6; }
         header { background: linear-gradient(135deg, var(--p) 0%, #1e40af 100%); color: white; padding: 40px 20px; text-align: center; position: relative; border-bottom: 4px solid var(--s); }
         
-        .theme-toggle { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); border: 1px solid white; color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.75rem; z-index: 100; }
+        .theme-toggle { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); border: 1px solid white; color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; z-index: 100; }
 
-        .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: -20px auto 30px; flex-wrap: wrap; padding: 0 10px; z-index: 10; position: relative; }
-        .tab-btn { background: var(--card); border: 1px solid var(--border); color: var(--txt); padding: 10px 15px; border-radius: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; display: flex; align-items: center; gap: 6px; font-size: 0.9rem; }
+        .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: -20px auto 30px; flex-wrap: wrap; padding: 0 10px; position: relative; z-index: 10; }
+        .tab-btn { background: var(--card); border: 1px solid var(--border); color: var(--txt); padding: 10px 16px; border-radius: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; font-size: 0.9rem; }
         .tab-btn.active { background: var(--s); color: white; border-color: var(--s); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; min-height: 600px; }
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
         .card { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .card h3 { color: var(--s); margin-top: 0; border-bottom: 1px solid var(--bg); padding-bottom: 10px; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .card h3 { color: var(--s); margin: 0 0 15px 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
 
         input, select, textarea { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--txt); box-sizing: border-box; font-size: 0.9rem; }
-        button { background: var(--s); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; font-size: 0.9rem; }
-        button:hover { transform: translateY(-1px); filter: brightness(1.1); }
+        button { background: var(--s); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; margin-top: 5px; }
+        button:hover { filter: brightness(1.1); transform: translateY(-1px); }
         
-        .res { display: none; margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(37, 99, 235, 0.05); border: 1px dashed var(--s); font-size: 0.85rem; text-align: center; color: var(--s); font-weight: bold; }
+        .res { display: none; margin-top: 12px; padding: 10px; border-radius: 8px; background: rgba(37, 99, 235, 0.05); border: 1px dashed var(--s); font-size: 0.9rem; text-align: center; color: var(--p); font-weight: bold; }
 
         /* أيقونات التواصل */
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .social-links a { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+        .social-links { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .social-links a { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1rem; transition: 0.3s; }
         .social-fb { background: #1877f2; } .social-li { background: #0a66c2; } .social-in { background: #e4405f; }
-
+        
         footer { background: var(--p); color: white; padding: 40px 20px; text-align: center; margin-top: 80px; }
-        #pdf-hidden { position: absolute; left: -9999px; width: 700px; background: white; color: black; padding: 50px; direction: rtl; }
+        #pdf-hidden { position: absolute; left: -9999px; width: 700px; background: white; color: black; padding: 40px; direction: rtl; }
     </style>
 </head>
 <body>
 
 <header>
-    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> المظهر</button>
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-adjust"></i> المظهر</button>
     <h1>منصة المِعيار الذكية</h1>
-    <p>الأدوات المتكاملة برؤية عصرية</p>
+    <p>15 أداة احترافية في واجهة واحدة</p>
 </header>
 
 <div class="nav-tabs">
-    <button class="tab-btn active" onclick="openTab(event, 'personal')"><i class="fas fa-user"></i> أدوات شخصية</button>
-    <button class="tab-btn" onclick="openTab(event, 'engineering')"><i class="fas fa-drafting-compass"></i> هندسة وطاقة</button>
-    <button class="tab-btn" onclick="openTab(event, 'financial')"><i class="fas fa-wallet"></i> مال وإسلاميات</button>
-    <button class="tab-btn" onclick="openTab(event, 'about')"><i class="fas fa-info-circle"></i> من نحن</button>
+    <button class="tab-btn active" onclick="openTab(event, 'main-tools')">🛠️ أدوات عامة</button>
+    <button class="tab-btn" onclick="openTab(event, 'eng-tools')">⚙️ هندسة وطاقة</button>
+    <button class="tab-btn" onclick="openTab(event, 'health-tools')">⚖️ حاسبات متنوعة</button>
+    <button class="tab-btn" onclick="openTab(event, 'about-page')">📖 من نحن</button>
 </div>
 
 <div class="container">
     
-    <div id="personal" class="tab-content" style="display: grid;">
+    <div id="main-tools" class="tab-content" style="display: grid;">
         <div class="tools-grid">
             <div class="card">
-                <h3><i class="fas fa-file-pdf"></i> صانع السيرة الذاتية</h3>
-                <input type="text" id="cvName" placeholder="الاسم الكامل">
-                <input type="text" id="cvJob" placeholder="المسمى الوظيفي">
-                <textarea id="cvExp" rows="2" placeholder="الخبرات..."></textarea>
+                <h3><i class="fas fa-file-pdf"></i> 1. صانع السيرة الذاتية</h3>
+                <input type="text" id="cvN" placeholder="الاسم">
+                <input type="text" id="cvJ" placeholder="التخصص">
+                <textarea id="cvE" rows="2" placeholder="الخبرات..."></textarea>
                 <button onclick="saveCV()">تحميل PDF</button>
             </div>
             <div class="card">
-                <h3><i class="fas fa-spell-check"></i> مصحح الهمزات</h3>
-                <textarea id="gramIn" rows="2" placeholder="أدخل النص..."></textarea>
-                <button onclick="doGrammar()">تصحيح فوري</button>
-                <div id="gramRes" class="res"></div>
+                <h3><i class="fas fa-coins"></i> 2. حاسبة الزكاة</h3>
+                <input type="number" id="gP" placeholder="سعر جرام الذهب">
+                <input type="number" id="gW" placeholder="الوزن بالجرام">
+                <button onclick="calcZ()">احسب</button>
+                <div id="zRes" class="res"></div>
             </div>
             <div class="card">
-                <h3><i class="fas fa-graduation-cap"></i> حاسبة المعدل GPA</h3>
-                <input type="number" id="gpaS" placeholder="مجموع الدرجات">
-                <input type="number" id="gpaH" placeholder="إجمالي الساعات">
-                <button onclick="calcGPA()">احسب المعدل</button>
-                <div id="gpaRes" class="res"></div>
+                <h3><i class="fas fa-sync"></i> 3. محول العملات الموازي</h3>
+                <input type="number" id="curV" placeholder="المبلغ">
+                <input type="number" id="parR" placeholder="سعر الصرف (يدوياً)">
+                <button onclick="calcCur()">تحويل</button>
+                <div id="curRes" class="res"></div>
             </div>
             <div class="card">
-                <h3><i class="fas fa-clock"></i> محول التاريخ</h3>
+                <h3><i class="fas fa-check-double"></i> 4. مدقق الهمزات</h3>
+                <textarea id="txtIn" rows="2" placeholder="أدخل النص..."></textarea>
+                <button onclick="fixTxt()">تصحيح</button>
+                <div id="fixRes" class="res"></div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> 5. محول التاريخ</h3>
                 <input type="date" id="dateIn">
-                <button onclick="alert('تاريخ اليوم بالهجري: ' + new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {day:'numeric', month:'long', year:'numeric'}).format(new Date(document.getElementById('dateIn').value)))">تحويل للهجري</button>
+                <button onclick="convDate()">عرض التفاصيل</button>
+                <div id="dateRes" class="res"></div>
             </div>
             <div class="card">
-                <h3><i class="fas fa-text-height"></i> عداد الكلمات والحروف</h3>
-                <textarea id="wordIn" rows="2" placeholder="أدخل النص هنا..."></textarea>
-                <button onclick="document.getElementById('wordRes').innerText = 'الكلمات: ' + document.getElementById('wordIn').value.split(' ').length; document.getElementById('wordRes').style.display='block'">عد الكلمات</button>
-                <div id="wordRes" class="res"></div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-qrcode"></i> مولد QR Code بسيط</h3>
-                <input type="text" id="qrIn" placeholder="أدخل الرابط أو النص">
-                <button onclick="alert('سيتم فتح الرابط في نافذة جديدة لتوليد الكود')">توليد الكود</button>
+                <h3><i class="fas fa-graduation-cap"></i> 6. حاسبة المعدل GPA</h3>
+                <input type="number" id="gpaM" placeholder="مجموع الدرجات">
+                <input type="number" id="gpaH" placeholder="إجمالي الساعات">
+                <button onclick="calcGPA()">احسب</button>
+                <div id="gpaRes" class="res"></div>
             </div>
         </div>
     </div>
 
-    <div id="engineering" class="tab-content">
+    <div id="eng-tools" class="tab-content">
         <div class="tools-grid">
-            <div class="card">
-                <h3><i class="fas fa-solar-panel"></i> تقدير الطاقة الشمسية</h3>
-                <input type="number" id="solarLoad" placeholder="الحمل المطلوب (Watt)">
-                <button onclick="calcSolar()">تقدير المنظومة</button>
-                <div id="solarRes" class="res"></div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-bolt"></i> حاسبة القدرة (P=V*I)</h3>
-                <input type="number" id="loadA" placeholder="التيار (Ampere)">
-                <input type="number" id="loadV" placeholder="الجهد (Volt)" value="220">
-                <button onclick="calcPower()">احسب الواط</button>
-                <div id="pRes" class="res"></div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-wave-square"></i> طول الموجة (λ)</h3>
-                <input type="number" id="freqIn" placeholder="التردد (Hz)">
-                <button onclick="document.getElementById('waveRes').innerText='الطول: '+(300000000/document.getElementById('freqIn').value).toFixed(2)+' متر'; document.getElementById('waveRes').style.display='block'">احسب λ</button>
-                <div id="waveRes" class="res"></div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-microchip"></i> قانون أوم (V=I*R)</h3>
-                <input type="number" id="ohmI" placeholder="التيار (I)">
-                <input type="number" id="ohmR" placeholder="المقاومة (R)">
-                <button onclick="calcOhm()">احسب الجهد (V)</button>
-                <div id="ohmRes" class="res"></div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-file-download"></i> نماذج تقارير هندسية</h3>
-                <button onclick="alert('جاري تجهيز روابط التحميل المباشرة...')">تحميل نموذج Excel</button>
-            </div>
-        </div>
-    </div>
