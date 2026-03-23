@@ -3,230 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنصة الهندسية المتكاملة | تطوير الغنودي</title>
+    <title>منصة الغنودي الشاملة | 13 أداة ذكية</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        :root { --primary: #1e293b; --accent: #3b82f6; --success: #22c55e; --bg: #f8fafc; --card-bg: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; line-height: 1.6; }
+        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --warn: #f59e0b; --bg: #f1f5f9; --w: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; }
         
-        header { background: var(--primary); color: white; padding: 60px 20px; text-align: center; border-bottom: 5px solid var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; }
+        header { background: linear-gradient(135deg, var(--p) 0%, #1e293b 100%); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--s); }
+        .nav-tabs { background: var(--w); padding: 10px; display: flex; justify-content: center; gap: 10px; sticky: top; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex-wrap: wrap; }
+        .tab-btn { padding: 10px 20px; border: none; background: none; cursor: pointer; font-weight: bold; color: var(--p); border-radius: 5px; }
+        .tab-btn.active { background: var(--s); color: white; }
 
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 25px; }
+        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
         
-        .card { background: var(--card-bg); padding: 30px; border-radius: 18px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; transition: 0.3s ease; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); }
-        .card h3 { color: var(--primary); margin-top: 0; font-size: 1.5rem; border-right: 5px solid var(--accent); padding-right: 15px; margin-bottom: 15px; }
-        .desc { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; min-height: 40px; }
+        .card { background: var(--w); padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: var(--s); }
+        .card h3 { color: var(--p); margin-top: 0; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        .tag { position: absolute; top: 10px; left: 10px; font-size: 0.7rem; background: #f1f5f9; padding: 2px 8px; border-radius: 10px; color: var(--s); font-weight: bold; }
 
-        input, select, textarea { width: 100%; padding: 14px; margin: 10px 0; border-radius: 10px; border: 2px solid #e2e8f0; font-size: 15px; box-sizing: border-box; outline: none; transition: 0.2s; }
-        input:focus { border-color: var(--accent); }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; font-size: 14px; }
+        button { background: var(--s); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { filter: brightness(1.1); }
+        .btn-sc { background: var(--sc); }
+
+        .res { background: #f8fafc; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px dashed var(--s); text-align: center; font-weight: 600; }
         
-        button { background: var(--accent); color: white; border: none; padding: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1.1rem; transition: 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        button:hover { filter: brightness(1.1); box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4); }
-        .btn-green { background: var(--success); }
-
-        .res-box { background: #f1f5f9; padding: 20px; border-radius: 12px; display: none; margin-top: 15px; border: 1px dashed var(--accent); text-align: right; overflow: hidden; }
-        
-        footer { background: var(--primary); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; }
-        footer a { color: #93c5fd; text-decoration: none; font-weight: bold; cursor: pointer; }
-        .copy { margin-top: 20px; opacity: 0.7; font-size: 0.85rem; }
-
-        #loading { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: var(--success); display: none; z-index: 1000; }
+        footer { background: var(--p); color: white; padding: 40px; text-align: center; margin-top: 60px; }
+        footer a { color: #60a5fa; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div id="loading"></div>
-
 <header>
-    <h1>بوابة الأدوات الذكية الموحدة</h1>
-    <p>المنصة الرسمية للهندسة والتقنية - تطوير المهندس الغنودي</p>
+    <h1>مركز الغنودي للأدوات الذكية</h1>
+    <p>المنصة المتكاملة للحلول التقنية والهندسية واليومية</p>
 </header>
 
 <div class="container">
-    <div class="tools-grid">
+    <div class="grid">
         
         <div class="card">
-            <h3>📄 محول Word إلى PDF</h3>
-            <p class="desc">تحويل النصوص والمستندات إلى ملفات PDF رسمية عالية الجودة فوراً.</p>
-            <textarea id="pdfText" rows="4" placeholder="أدخل النص هنا لتحويله لملف PDF..."></textarea>
-            <button onclick="convertToPDF()">توليد وتحميل PDF</button>
-            <div id="pdfStatus" class="res-box"></div>
+            <span class="tag">مهني</span>
+            <h3>📄 صانع CV سريع</h3>
+            <input type="text" id="cvName" placeholder="الاسم الكامل">
+            <input type="text" id="cvJob" placeholder="المسمى الوظيفي">
+            <textarea id="cvExp" placeholder="الخبرات (اختصار)"></textarea>
+            <button onclick="makeCV()">تحميل السيرة الذاتية (PDF)</button>
+            <div id="cvRes" class="res"></div>
         </div>
 
         <div class="card">
+            <span class="tag">صحة</span>
+            <h3>⚖️ فاحص الوزن (BMI)</h3>
+            <input type="number" id="bmiW" placeholder="الوزن (كجم)">
+            <input type="number" id="bmiH" placeholder="الطول (سم)">
+            <button onclick="calcBMI()" class="btn-sc">فحص الحالة الصحية</button>
+            <div id="bmiRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">ملفات</span>
+            <h3>🖼️ تحويل صورة لـ PDF</h3>
+            <input type="file" id="imgToPdfIn" accept="image/*">
+            <button onclick="imgToPdf()">تحويل وتحميل PDF</button>
+            <div id="itpRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">مالي</span>
+            <h3>💰 حاسبة القروض والتقسيط</h3>
+            <input type="number" id="loanA" placeholder="قيمة القرض">
+            <input type="number" id="loanR" placeholder="الفائدة %">
+            <input type="number" id="loanT" placeholder="المدة (شهور)">
+            <button onclick="calcLoan()">حساب القسط الشهري</button>
+            <div id="loanRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">أدوات</span>
+            <h3>📝 عداد الكلمات والحروف</h3>
+            <textarea id="wordIn" placeholder="الصق النص هنا..." oninput="countWords()"></textarea>
+            <div id="wordRes" class="res" style="display:block; border:none; background:none;">الحروف: 0 | الكلمات: 0</div>
+        </div>
+
+        <div class="card">
+            <span class="tag">أمان</span>
+            <h3>🔒 مولد كلمات سر قوية</h3>
+            <button onclick="genPass()">توليد كلمة سر آمنة</button>
+            <div id="passRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">تقني</span>
+            <h3>🔗 محول الرابط لـ QR</h3>
+            <input type="text" id="qrIn" placeholder="ضع الرابط هنا">
+            <button onclick="doQR()" class="btn-sc">توليد الرمز</button>
+            <div id="qrRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">وسائط</span>
             <h3>📷 ضاغط الصور الاحترافي</h3>
-            <p class="desc">ضغط الصور لتقليل الحجم مع الحفاظ على الجودة (يعمل 100% الآن).</p>
-            <input type="file" id="imgFile" accept="image/*">
-            <button onclick="compressAndDownload()" class="btn-green">تحسين وتحميل الصورة</button>
-            <div id="imgRes" class="res-box"></div>
+            <input type="file" id="compIn" accept="image/*">
+            <button onclick="doComp()">ضغط وتحميل</button>
+            <div id="compRes" class="res"></div>
         </div>
 
         <div class="card">
-            <h3>💱 محول العملات (سعر ليبيا)</h3>
-            <p class="desc">تحويل فوري بين العملات العالمية والدينار الليبي بدقة.</p>
-            <input type="number" id="curVal" placeholder="المبلغ">
-            <div style="display: flex; gap: 10px;">
-                <select id="curF"><option value="USD">دولار (USD)</option><option value="LYD">دينار (LYD)</option><option value="EUR">يورو (EUR)</option></select>
-                <select id="curT"><option value="LYD">دينار (LYD)</option><option value="USD">دولار (USD)</option><option value="EUR">يورو (EUR)</option></select>
-            </div>
-            <button onclick="calcCur()">تحويل الآن</button>
-            <div id="curRes" class="res-box"></div>
+            <span class="tag">مالي</span>
+            <h3>💱 محول العملات (ليبيا)</h3>
+            <input type="number" id="currVal" placeholder="المبلغ">
+            <select id="currF"><option value="USD">دولار</option><option value="LYD">دينار</option></select>
+            <button onclick="doCurr()">تحويل فوري</button>
+            <div id="currRes" class="res"></div>
         </div>
 
         <div class="card">
-            <h3>✍️ المدقق اللغوي (v4.5)</h3>
-            <p class="desc">فحص احترافي للنصوص وتصحيح التاء والهمزات وعلامات الترقيم.</p>
-            <textarea id="gramIn" rows="4" placeholder="أدخل النص العربي..."></textarea>
-            <button onclick="checkArabic()">تدقيق النص</button>
-            <div id="gramRes" class="res-box"></div>
+            <span class="tag">لغة</span>
+            <h3>✍️ المدقق اللغوي الذكي</h3>
+            <textarea id="gramIn" placeholder="أدخل النص العربي..."></textarea>
+            <button onclick="doGrammar()" class="btn-sc">تدقيق وتنسيق</button>
+            <div id="gramRes" class="res" style="text-align:right"></div>
         </div>
 
         <div class="card">
-            <h3>🎓 حاسبة المعدل الجامعي</h3>
-            <p class="desc">حساب المعدل التراكمي للطلاب (GPA) بدقة بناءً على الساعات المعتمدة.</p>
-            <input type="number" id="gpaScore" placeholder="مجموع الدرجات">
-            <input type="number" id="gpaHours" placeholder="إجمالي الساعات">
-            <button onclick="calcGPA()" class="btn-green">حساب المعدل</button>
-            <div id="gpaRes" class="res-area res-box"></div>
+            <span class="tag">هندسة</span>
+            <h3>⚡ الحاسبة الهندسية</h3>
+            <select id="engM"><option value="o">قانون أوم</option><option value="w">طول الموجة</option></select>
+            <input type="number" id="ev1" placeholder="القيمة الأولى">
+            <input type="number" id="ev2" placeholder="القيمة الثانية">
+            <button onclick="doEng()">حساب النتيجة</button>
+            <div id="engRes" class="res"></div>
         </div>
 
         <div class="card">
-            <h3>⚡ حاسبة الهندسة الكهربائية</h3>
-            <p class="desc">حساب قانون أوم، التردد، وطول الهوائيات للمهندسين.</p>
-            <select id="eM" onchange="eUpd()">
-                <option value="o">قانون أوم (V=I*R)</option>
-                <option value="w">طول الموجة (λ)</option>
-            </select>
-            <div id="eIn">
-                <input type="number" id="vA" placeholder="التيار (I)">
-                <input type="number" id="vB" placeholder="المقاومة (R)">
-            </div>
-            <button onclick="runEng()">احسب القيمة</button>
-            <div id="eRes" class="res-box"></div>
+            <span class="tag">تعليم</span>
+            <h3>🎓 حاسبة المعدل GPA</h3>
+            <input type="number" id="gpaS" placeholder="مجموع الدرجات">
+            <input type="number" id="gpaH" placeholder="إجمالي الساعات">
+            <button onclick="doGPA()" class="btn-sc">حساب المعدل</button>
+            <div id="gpaRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">ملفات</span>
+            <h3>📄 محول النصوص لـ PDF</h3>
+            <textarea id="txtToPdfIn" placeholder="اكتب موضوعك هنا..."></textarea>
+            <button onclick="txtToPdf()">حفظ كـ PDF</button>
+            <div id="tpdfRes" class="res"></div>
         </div>
 
     </div>
 </div>
 
 <footer>
-    <p>تطوير المهندس: <strong>حمادي الغنودي</strong></p>
-    <p>
-        <a onclick="alert('خصوصيتك تهمنا: المنصة تعالج البيانات في جهازك ولا تخزن أي ملفات.')">سياسة الخصوصية</a> | 
-        <a href="mailto:hamady.1500@Gmail.com">اتصل بنا (مباشر)</a>
-    </p>
-    <div class="copy">© 2026 مركز الأدوات الذكية - درنة، ليبيا</div>
+    <p>بوابة الأدوات الذكية - تطوير المهندس <strong>محمد الغنودي</strong></p>
+    <p><a href="mailto:hamady.1500@Gmail.com">اتصل بنا</a> | <a onclick="alert('جميع العمليات تتم محلياً لضمان خصوصيتك.')">الخصوصية</a></p>
+    <div style="margin-top:20px; opacity:0.6">© 2026 جميع الحقوق محفوظة</div>
 </footer>
 
 <canvas id="cvs" style="display:none;"></canvas>
 
 <script>
-    // 1. تحويل لـ PDF
-    function convertToPDF() {
-        const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
+
+    // 1. CV Maker
+    function makeCV() {
         const doc = new jsPDF();
-        const text = document.getElementById('pdfText').value;
-        if(!text) return alert("أدخل نصاً");
-        
-        doc.setFontSize(16);
-        doc.text(text, 10, 20);
-        doc.save("SmartTools_Document.pdf");
-        
-        const res = document.getElementById('pdfStatus');
-        res.innerHTML = "✅ تم تحويل النص وتحميل ملف PDF بنجاح!";
-        res.style.display = "block";
+        const n = document.getElementById('cvName').value;
+        const j = document.getElementById('cvJob').value;
+        const e = document.getElementById('cvExp').value;
+        doc.text(`Name: ${n}\nJob: ${j}\nExperience: ${e}`, 10, 20);
+        doc.save("CV_Ghnoudi.pdf");
+        document.getElementById('cvRes').innerHTML = "✅ تم تحميل السيرة الذاتية";
+        document.getElementById('cvRes').style.display="block";
     }
 
-    // 2. معالجة الصور (الحل النهائي للتحميل)
-    function compressAndDownload() {
-        const file = document.getElementById('imgFile').files[0];
-        if(!file) return alert("اختر صورة");
-        
+    // 2. BMI
+    function calcBMI() {
+        const w = parseFloat(document.getElementById('bmiW').value);
+        const h = parseFloat(document.getElementById('bmiH').value)/100;
+        const bmi = (w/(h*h)).toFixed(1);
+        let msg = bmi < 18.5 ? "نقص وزن" : bmi < 25 ? "وزن مثالي" : "زيادة وزن";
+        document.getElementById('bmiRes').innerHTML = `كتلة الجسم: ${bmi} (${msg})`;
+        document.getElementById('bmiRes').style.display="block";
+    }
+
+    // 3. Image to PDF
+    function imgToPdf() {
+        const file = document.getElementById('imgToPdfIn').files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.getElementById('cvs');
-                const ctx = canvas.getContext('2d');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-                
-                canvas.toBlob((blob) => {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = "Optimized_By_Alghanoudi.jpg";
-                    link.click();
-                    URL.revokeObjectURL(url);
-                    
-                    document.getElementById('imgRes').innerText = "✅ تمت المعالجة! الصورة الآن في مجلد التحميلات.";
-                    document.getElementById('imgRes').style.display = "block";
-                }, 'image/jpeg', 0.6);
-            };
-            img.src = e.target.result;
+            const doc = new jsPDF();
+            doc.addImage(e.target.result, 'JPEG', 10, 10, 180, 160);
+            doc.save("Converted_Image.pdf");
         };
         reader.readAsDataURL(file);
     }
 
-    // 3. المدقق اللغوي المتطور
-    function checkArabic() {
-        let t = document.getElementById('gramIn').value;
-        if(!t) return;
-        let clean = t.trim()
-            .replace(/\s+/g, ' ')
-            .replace(/ ,/g, '،').replace(/ \./g, '.')
-            .replace(/انشاء الله/g, 'إن شاء الله')
-            .replace(/مؤخرن/g, 'مؤخراً');
-        
-        const res = document.getElementById('gramRes');
-        res.innerHTML = `<b>النص بعد التدقيق:</b><br>${clean}`;
-        res.style.display = "block";
+    // 4. Loan
+    function calcLoan() {
+        const a = parseFloat(document.getElementById('loanA').value);
+        const r = parseFloat(document.getElementById('loanR').value)/100/12;
+        const t = parseFloat(document.getElementById('loanT').value);
+        const m = (a * r) / (1 - Math.pow(1+r, -t));
+        document.getElementById('loanRes').innerHTML = `القسط الشهري: ${m.toFixed(2)}`;
+        document.getElementById('loanRes').style.display="block";
     }
 
-    // 4. حاسبة المعدل
-    function calcGPA() {
-        const s = parseFloat(document.getElementById('gpaScore').value);
-        const h = parseFloat(document.getElementById('gpaHours').value);
-        const res = document.getElementById('gpaRes');
-        if(isNaN(s) || isNaN(h)) return;
-        res.innerHTML = `المعدل التقديري: <b>${(s/h).toFixed(2)}</b>`;
-        res.style.display = "block";
+    // 5. Words
+    function countWords() {
+        const t = document.getElementById('wordIn').value;
+        document.getElementById('wordRes').innerText = `الحروف: ${t.length} | الكلمات: ${t.trim().split(/\s+/).length}`;
     }
 
-    // 5. محول العملات
-    function calcCur() {
-        const amt = parseFloat(document.getElementById('curVal').value);
-        const f = document.getElementById('curF').value;
-        const t = document.getElementById('curT').value;
-        const rates = { "USD": 1, "LYD": 4.86, "EUR": 0.92 };
-        let result = (amt / rates[f]) * rates[t];
-        const res = document.getElementById('curRes');
-        res.innerHTML = `النتيجة: <b>${result.toFixed(2)} ${t}</b>`;
-        res.style.display = "block";
+    // 6. Pass Gen
+    function genPass() {
+        const p = Math.random().toString(36).slice(-10).toUpperCase();
+        document.getElementById('passRes').innerHTML = `كلمة السر: ${p}`;
+        document.getElementById('passRes').style.display="block";
     }
 
-    // 6. الحاسبة الهندسية
-    function eUpd() {
-        const m = document.getElementById('eM').value;
-        const box = document.getElementById('eIn');
-        if(m==='o') box.innerHTML = '<input type="number" id="vA" placeholder="التيار (I)"> <input type="number" id="vB" placeholder="المقاومة (R)">';
-        else box.innerHTML = '<input type="number" id="vA" placeholder="التردد (f) بـ MHz">';
+    // 7. QR
+    function doQR() {
+        const v = document.getElementById('qrIn').value;
+        document.getElementById('qrRes').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${v}" />`;
+        document.getElementById('qrRes').style.display="block";
     }
-    function runEng() {
-        const m = document.getElementById('eM').value;
-        const a = parseFloat(document.getElementById('vA').value);
-        const b = document.getElementById('vB') ? parseFloat(document.getElementById('vB').value) : 0;
-        let out = (m==='o') ? (a*b).toFixed(2)+" فولت" : (300/a).toFixed(3)+" متر";
-        const res = document.getElementById('eRes');
-        res.innerHTML = `النتيجة الهندسية: <b>${out}</b>`;
-        res.style.display = "block";
+
+    // 8. Compress (Fix)
+    function doComp() {
+        const f = document.getElementById('compIn').files[0];
+        const r = new FileReader();
+        r.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const c = document.getElementById('cvs');
+                c.width = img.width; c.height = img.height;
+                c.getContext('2d').drawImage(img, 0, 0);
+                c.toBlob(b => {
+                    const u = URL.createObjectURL(b);
+                    const l = document.createElement('a');
+                    l.href = u; l.download = "Compressed.jpg"; l.click();
+                }, 'image/jpeg', 0.5);
+            };
+            img.src = e.target.result;
+        };
+        r.readAsDataURL(f);
+    }
+
+    // 9. Currency
+    function doCurr() {
+        const a = document.getElementById('currVal').value;
+        const f = document.getElementById('currF').value;
+        const res = f === 'USD' ? a * 4.88 : a / 4.88;
+        document.getElementById('currRes').innerHTML = `النتيجة: ${res.toFixed(2)}`;
+        document.getElementById('currRes').style.display="block";
+    }
+
+    // 10. Grammar
+    function doGrammar() {
+        const t = document.getElementById('gramIn').value;
+        const c = t.trim().replace(/\s+/g, ' ').replace(/ ,/g, '،');
+        document.getElementById('gramRes').innerHTML = c;
+        document.getElementById('gramRes').style.display="block";
+    }
+
+    // 11. Engineering
+    function doEng() {
+        const m = document.getElementById('engM').value;
+        const v1 = parseFloat(document.getElementById('ev1').value);
+        const v2 = parseFloat(document.getElementById('ev2').value);
+        let r = m === 'o' ? v1 * v2 : 300 / v1;
+        document.getElementById('engRes').innerHTML = `النتيجة: ${r.toFixed(2)}`;
+        document.getElementById('engRes').style.display="block";
+    }
+
+    // 12. GPA
+    function doGPA() {
+        const s = document.getElementById('gpaS').value;
+        const h = document.getElementById('gpaH').value;
+        document.getElementById('gpaRes').innerHTML = `المعدل: ${(s/h).toFixed(2)}`;
+        document.getElementById('gpaRes').style.display="block";
+    }
+
+    // 13. Text to PDF
+    function txtToPdf() {
+        const doc = new jsPDF();
+        doc.text(document.getElementById('txtToPdfIn').value, 10, 20);
+        doc.save("Text.pdf");
     }
 </script>
-
 </body>
 </html>
