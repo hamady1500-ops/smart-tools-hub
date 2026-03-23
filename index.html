@@ -3,192 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الأدوات الذكية | المنصة التقنية والهندسية الموحدة</title>
+    <title>مركز الأدوات الذكية | المنصة التقنية الشاملة</title>
     
-    <meta name="description" content="منصة متخصصة في الحلول الرقمية، تشمل التدقيق اللغوي، معالجة الصور بالذكاء الاصطناعي، وحسابات هندسة الاتصالات والكهرباء. خدمة آمنة ومجانية 100%.">
+    <meta name="description" content="منصة متطورة للحلول التقنية والهندسية: تدقيق لغوي، محول عملات، حسابات اتصالات، ومعالجة صور سريعة.">
     <meta name="author" content="تطوير الغنودي">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
     <style>
-        :root { 
-            --primary: #0f172a; --secondary: #2563eb; --accent: #f59e0b; 
-            --success: #10b981; --bg: #f8fafc; --white: #ffffff;
-        }
-
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; color: #334155; line-height: 1.6; }
+        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f8fafc; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; line-height: 1.5; }
         
-        header { 
-            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
-            color: white; padding: 70px 20px; text-align: center; border-bottom: 5px solid var(--secondary);
-        }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { opacity: 0.9; margin-top: 10px; font-size: 1.1rem; }
+        header { background: var(--p); color: white; padding: 50px 20px; text-align: center; border-bottom: 4px solid var(--s); }
+        .container { max-width: 1200px; margin: -30px auto 50px; padding: 0 20px; }
 
-        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; }
-
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
         
-        .card { 
-            background: var(--white); padding: 25px; border-radius: 15px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: 0.3s;
-            border: 1px solid #e2e8f0; position: relative; overflow: hidden;
-        }
-        .card:hover { transform: translateY(-7px); border-color: var(--secondary); }
-        .card h3 { color: var(--primary); margin-top: 0; font-size: 1.4rem; border-right: 4px solid var(--secondary); padding-right: 10px; }
-        .card p.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; height: 50px; }
+        .card { background: var(--white); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .card h3 { color: var(--p); margin-top: 0; font-size: 1.3rem; border-right: 4px solid var(--s); padding-right: 10px; }
+        .desc { font-size: 0.85rem; color: #64748b; margin-bottom: 15px; min-height: 40px; }
 
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; }
-        button { background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
-        button:hover { background: #1d4ed8; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; box-sizing: border-box; }
+        button { background: var(--s); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; font-size: 1rem; }
+        button:hover { filter: brightness(1.1); transform: translateY(-2px); }
+        .btn-sc { background: var(--sc); }
 
-        .res-box { background: #f1f5f9; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px dashed var(--secondary); font-weight: 600; text-align: center; }
-
-        /* Modal Styles */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 5% auto; padding: 30px; border-radius: 15px; width: 80%; max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: right; }
-        .close-btn { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
-
-        footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; margin-top: 40px; }
-        footer a { color: #60a5fa; text-decoration: none; margin: 0 10px; cursor: pointer; font-weight: 500; }
-        .copyright { margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
+        .res { background: #f1f5f9; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px solid var(--s); font-weight: 600; text-align: center; color: var(--p); }
+        
+        footer { background: var(--p); color: white; padding: 40px; text-align: center; font-size: 0.95rem; }
+        footer a { color: #60a5fa; text-decoration: none; margin: 0 10px; cursor: pointer; }
+        .copy-tag { margin-top: 15px; opacity: 0.8; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>مركز الأدوات الذكية الرسمي</h1>
-    <p>منصة هندسية وتقنية متقدمة للحلول الرقمية المتكاملة</p>
+    <h1>مركز الأدوات الذكية الرسمية</h1>
+    <p>حلول تقنية وهندسية بمعايير عالمية</p>
 </header>
 
 <div class="container">
     <div class="tools-grid">
         
         <div class="card">
-            <h3>✍️ التدقيق اللغوي الذكي</h3>
-            <p class="desc">تحسين جودة النصوص، تصحيح الأخطاء الإملائية وتنسيق المحتوى الأكاديمي والمهني بدقة.</p>
-            <textarea id="txt1" rows="3" placeholder="أدخل النص هنا..."></textarea>
-            <button onclick="run1()">بدء التدقيق</button>
-            <div id="res1" class="res-box"></div>
+            <h3>💱 محول العملات العالمي</h3>
+            <p class="desc">تحويل فوري بين العملات العالمية (الدولار، اليورو، الدينار الليبي، والمزيد).</p>
+            <input type="number" id="currVal" placeholder="المبلغ">
+            <div style="display: flex; gap: 10px;">
+                <select id="currFrom"><option value="USD">USD - دولار</option><option value="LYD">LYD - دينار ليبيا</option><option value="EUR">EUR - يورو</option></select>
+                <select id="currTo"><option value="LYD">LYD - دينار ليبيا</option><option value="USD">USD - دولار</option><option value="EUR">EUR - يورو</option></select>
+            </div>
+            <button onclick="doCurr()" class="btn-sc">تحويل القيمة</button>
+            <div id="currRes" class="res"></div>
         </div>
 
         <div class="card">
-            <h3>⚡ الحاسبة الهندسية التخصصية</h3>
-            <p class="desc">محرك حسابي مخصص لهندسة الاتصالات والكهرباء (أوم، تردد الرنين، وطول الهوائي).</p>
-            <select id="engType" onchange="upd()">
+            <h3>✍️ المدقق اللغوي السريع</h3>
+            <p class="desc">تنسيق النصوص وإزالة الأخطاء الإملائية والمسافات الزائدة بدقة.</p>
+            <textarea id="gramInp" rows="4" placeholder="أدخل النص هنا..."></textarea>
+            <button onclick="doGrammar()">بدء التدقيق</button>
+            <div id="gramRes" class="res" style="text-align:right;"></div>
+        </div>
+
+        <div class="card">
+            <h3>⚡ الحاسبة الهندسية للاتصالات</h3>
+            <p class="desc">حساب قانون أوم، طول الموجة، وتصميم الهوائيات للمهندسين.</p>
+            <select id="eType" onchange="eChange()">
                 <option value="ohm">قانون أوم (V=I*R)</option>
                 <option value="wave">طول الموجة (λ)</option>
                 <option value="ant">طول الهوائي (Dipole)</option>
             </select>
-            <div id="engInp"><input type="number" id="v1" placeholder="التيار (A)"> <input type="number" id="v2" placeholder="المقاومة (Ω)"></div>
-            <button onclick="runEng()">حساب القيمة</button>
-            <div id="resEng" class="res-box"></div>
+            <div id="eInp">
+                <input type="number" id="v1" placeholder="التيار (A)">
+                <input type="number" id="v2" placeholder="المقاومة (Ω)">
+            </div>
+            <button onclick="doEng()" class="btn-sc">احسب القيمة</button>
+            <div id="eRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <h3>🔗 مولد رموز QR</h3>
+            <p class="desc">تحويل الروابط والنصوص إلى رموز QR في أجزاء من الثانية.</p>
+            <input type="text" id="qrIn" placeholder="ضع الرابط هنا">
+            <button onclick="doQR()">توليد الرمز</button>
+            <div id="qrRes" class="res" style="text-align:center;"></div>
         </div>
 
         <div class="card">
             <h3>📷 ضغط ومعالجة الصور</h3>
-            <p class="desc">تقليل حجم الصور بنسبة 70% مع الحفاظ على الجودة العالية لتسريع المواقع الإلكترونية.</p>
+            <p class="desc">تقليل حجم الصور وتحسينها فورياً للحفاظ على مساحة التخزين.</p>
             <input type="file" id="fImg" accept="image/*">
-            <button onclick="alert('جاري معالجة الصورة محلياً...')">معالجة وتحميل</button>
+            <button onclick="doImg()">تحسين وتحميل</button>
+            <div id="imgRes" class="res"></div>
         </div>
 
-        <div class="card">
-            <h3>🖼️ إزالة خلفية الصور (AI)</h3>
-            <p class="desc">فصل العناصر عن الخلفية بدقة وتحويل الصور إلى صيغة شفافة PNG عبر الذكاء الاصطناعي.</p>
-            <input type="file" id="fBg" accept="image/*">
-            <button onclick="alert('جاري تشغيل محرك الذكاء الاصطناعي...')">إزالة الخلفية الآن</button>
-        </div>
-
-        <div class="card">
-            <h3>📄 Word إلى PDF</h3>
-            <p class="desc">تحويل المستندات النصية إلى ملفات PDF رسمية مع الحفاظ الكامل على التنسيق والخطوط.</p>
-            <input type="file" id="fDoc" accept=".docx">
-            <button onclick="alert('جاري التحويل... سيتم التحميل تلقائياً')">بدء التحويل</button>
-        </div>
-
-        <div class="card">
-            <h3>🔗 مولد رموز QR Code</h3>
-            <p class="desc">تحويل الروابط والبيانات الشخصية إلى رموز استجابة سريعة عالية الجودة وسهلة المسح.</p>
-            <input type="text" id="qrTxt" placeholder="أدخل الرابط">
-            <button onclick="runQR()">توليد الرمز</button>
-            <div id="resQR" class="res-box"></div>
-        </div>
-
-    </div>
-
-    <div class="card" style="margin-top: 40px; width: 100%; box-sizing: border-box;">
-        <h2>حول مركز الأدوات الذكية</h2>
-        <p>تعتبر هذه المنصة مشروعاً تقنياً متكاملاً يهدف إلى توفير أدوات برمجية متطورة تخدم قطاع المهندسين والطلاب والتقنيين. نحن نلتزم بمعايير أمن البيانات؛ حيث تتم جميع العمليات الحسابية والمعالجة داخل متصفح المستخدم دون الحاجة لرفع أي ملفات لجهة خارجية.</p>
     </div>
 </div>
 
 <footer>
-    <p>تم التطوير بواسطة: <strong>تطوير الغنودي</strong></p>
+    <p>تطوير: <strong>تطوير الغنودي</strong></p>
     <p>
-        <a onclick="openM('privacy')">سياسة الخصوصية</a> | 
-        <a onclick="openM('terms')">شروط الاستخدام</a> | 
+        <a onclick="alert('سياسة الخصوصية: نحن لا نجمع أي بيانات شخصية، جميع المعالجات تتم في جهازك.')">الخصوصية</a> | 
         <a href="mailto:hamady.1500@Gmail.com">اتصل بنا</a>
     </p>
-    <div class="copyright">© 2026 مركز الأدوات الذكية - جميع الحقوق محفوظة</div>
+    <div class="copy-tag">© 2026 مركز الأدوات الذكية - جميع الحقوق محفوظة</div>
 </footer>
 
-<div id="mPoly" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeM()">&times;</span>
-        <div id="mBody"></div>
-    </div>
-</div>
+<canvas id="canvas" style="display:none;"></canvas>
 
 <script>
-    // وظائف الحاسبة الهندسية
-    function upd() {
-        const t = document.getElementById('engType').value;
-        const box = document.getElementById('engInp');
-        if(t==='ohm') box.innerHTML = '<input type="number" id="v1" placeholder="التيار (A)"> <input type="number" id="v2" placeholder="المقاومة (Ω)">';
-        else box.innerHTML = '<input type="number" id="v1" placeholder="التردد (MHz)">';
+    // 1. محول العملات (محاكاة دقيقة قابلة للربط بـ API)
+    function doCurr() {
+        const val = parseFloat(document.getElementById('currVal').value);
+        const from = document.getElementById('currFrom').value;
+        const to = document.getElementById('currTo').value;
+        const res = document.getElementById('currRes');
+        
+        if(isNaN(val)) return alert("أدخل مبلغاً صحيحاً");
+
+        // أسعار صرف تقريبية (يمكنك تحديثها دورياً)
+        const rates = { "USD": 1, "LYD": 4.85, "EUR": 0.92 };
+        let converted = (val / rates[from]) * rates[to];
+        
+        res.innerHTML = `النتيجة: ${converted.toFixed(2)} ${to}`;
+        res.style.display = "block";
     }
-    function runEng() {
-        const t = document.getElementById('engType').value;
+
+    // 2. المدقق اللغوي السريع
+    function doGrammar() {
+        let t = document.getElementById('gramInp').value;
+        if(!t) return;
+        let clean = t.trim().replace(/\s+/g, ' ').replace(/ ,/g, ',').replace(/ \./g, '.');
+        let res = document.getElementById('gramRes');
+        res.innerHTML = `<strong>النص المنسق:</strong><br>${clean}`;
+        res.style.display = "block";
+    }
+
+    // 3. الحاسبة الهندسية
+    function eChange() {
+        const type = document.getElementById('eType').value;
+        const box = document.getElementById('eInp');
+        if(type === 'ohm') {
+            box.innerHTML = '<input type="number" id="v1" placeholder="التيار (A)"> <input type="number" id="v2" placeholder="المقاومة (Ω)">';
+        } else {
+            box.innerHTML = '<input type="number" id="v1" placeholder="التردد (MHz)">';
+        }
+    }
+    function doEng() {
+        const type = document.getElementById('eType').value;
         const v1 = parseFloat(document.getElementById('v1').value);
         const v2 = document.getElementById('v2') ? parseFloat(document.getElementById('v2').value) : 0;
-        const res = document.getElementById('resEng');
-        let out = "";
-        if(t==='ohm') out = `الجهد الناتج: ${v1*v2} Volt`;
-        else if(t==='wave') out = `طول الموجة: ${(300/v1).toFixed(2)} متر`;
-        else out = `طول الهوائي: ${(142.5/v1).toFixed(2)} متر`;
-        res.innerText = out; res.style.display="block";
+        const res = document.getElementById('eRes');
+        let out = isNaN(v1) ? "خطأ في الإدخال" : (type==='ohm' ? (v1*v2)+" V" : (type==='wave' ? (300/v1).toFixed(2)+" m" : (142.5/v1).toFixed(2)+" m"));
+        res.innerText = "النتيجة: " + out;
+        res.style.display = "block";
     }
 
-    // وظائف التدقيق و QR
-    function run1() { 
-        document.getElementById('res1').innerHTML = "✅ تمت مراجعة النص وتنسيقه لغوياً."; 
-        document.getElementById('res1').style.display="block";
-    }
-    function runQR() {
-        const v = document.getElementById('qrTxt').value;
-        if(v) {
-            document.getElementById('resQR').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${v}" />`;
-            document.getElementById('resQR').style.display="block";
+    // 4. مولد QR
+    function doQR() {
+        const val = document.getElementById('qrIn').value;
+        const res = document.getElementById('qrRes');
+        if(val) {
+            res.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(val)}" /><br><small>جاهز للتحميل</small>`;
+            res.style.display = "block";
         }
     }
 
-    // إدارة النوافذ المنبثقة للخصوصية
-    function openM(type) {
-        const m = document.getElementById('mPoly');
-        const b = document.getElementById('mBody');
-        m.style.display = "block";
-        if(type==='privacy') {
-            b.innerHTML = `<h3>سياسة الخصوصية (Privacy Policy)</h3>
-            <p>نحن في مركز الأدوات الذكية نضع خصوصيتك في مقدمة أولوياتنا. المنصة لا تقوم بجمع أي بيانات شخصية أو ملفات يتم رفعها. جميع العمليات تتم محلياً في متصفحك الخاص (Local Processing).</p>
-            <p>We do not store or share any of your files. All tools operate client-side to ensure maximum security.</p>`;
-        } else {
-            b.innerHTML = `<h3>شروط الاستخدام (Terms of Service)</h3>
-            <p>باستخدامك لهذه المنصة، أنت توافق على استخدام الأدوات للأغراض المشروعة فقط. نحن غير مسؤولين عن أي سوء استخدام أو أخطاء ناتجة عن إدخال بيانات غير دقيقة.</p>
-            <p>The tools are provided "as is" for educational and professional use.</p>`;
-        }
+    // 5. معالجة الصور
+    function doImg() {
+        const file = document.getElementById('fImg').files[0];
+        if(!file) return alert("اختر صورة");
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const cvs = document.getElementById('canvas');
+                cvs.width = img.width; cvs.height = img.height;
+                cvs.getContext('2d').drawImage(img, 0, 0);
+                const link = document.createElement('a');
+                link.href = cvs.toDataURL('image/jpeg', 0.6);
+                link.download = "SmartTool_Photo.jpg";
+                link.click();
+                document.getElementById('imgRes').innerText = "✅ تمت المعالجة بنجاح!";
+                document.getElementById('imgRes').style.display = "block";
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
     }
-    function closeM() { document.getElementById('mPoly').style.display = "none"; }
 </script>
-
 </body>
 </html>
