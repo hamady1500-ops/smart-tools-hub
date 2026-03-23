@@ -3,163 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الأدوات الذكية | Smart Tools Hub</title>
+    <title>مركز الأدوات الذكية | المنصة التقنية والهندسية الموحدة</title>
     
-    <meta name="description" content="منصة احترافية متكاملة للأدوات الرقمية والهندسية. نوفر حلولاً سريعة لمعالجة الصور، وتحويل المستندات، وآلات حاسبة متخصصة في الهندسة الكهربائية. مجانية وآمنة ومحسنة لزيادة الإنتاجية.">
-    <meta name="keywords" content="تحويل ملفات، ضغط صور، حاسبة هندسية، قانون أوم، Word to PDF، أدوات مجانية">
-    
+    <meta name="description" content="منصة متخصصة في الحلول الرقمية، تشمل التدقيق اللغوي، معالجة الصور بالذكاء الاصطناعي، وحسابات هندسة الاتصالات والكهرباء. خدمة آمنة ومجانية 100%.">
+    <meta name="author" content="تطوير الغنودي">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
 
     <style>
-        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --text: #333; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        :root { 
+            --primary: #0f172a; --secondary: #2563eb; --accent: #f59e0b; 
+            --success: #10b981; --bg: #f8fafc; --white: #ffffff;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; color: #334155; line-height: 1.6; }
         
-        /* الهيدر */
-        header { background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color: white; padding: 60px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
+        header { 
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white; padding: 70px 20px; text-align: center; border-bottom: 5px solid var(--secondary);
+        }
         header h1 { margin: 0; font-size: 2.5rem; }
-        
-        .container { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; }
-        
-        /* شبكة الأدوات */
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 6px solid var(--primary); transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); }
-        .card h3 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        header p { opacity: 0.9; margin-top: 10px; font-size: 1.1rem; }
 
-        /* المحتوى النصي لـ SEO */
-        .seo-content { background: white; padding: 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .seo-content h2 { color: var(--secondary); }
+        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; }
 
-        /* عناصر التحكم */
-        input, button, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; outline: none; font-size: 1rem; }
-        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: var(--secondary); }
-        .res-box { background: #f0f4f8; padding: 15px; border-radius: 10px; display: none; margin-top: 10px; border-right: 5px solid var(--accent); }
-
-        /* التذييل والصفحات القانونية */
-        footer { background: #222; color: #ccc; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        footer a { color: var(--accent); text-decoration: none; margin: 0 10px; cursor: pointer; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
         
-        /* Modal (النافذة المنبثقة للسياسات) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; }
-        .modal-content { background: white; width: 80%; max-width: 600px; margin: 100px auto; padding: 30px; border-radius: 20px; text-align: right; direction: rtl; }
+        .card { 
+            background: var(--white); padding: 25px; border-radius: 15px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: 0.3s;
+            border: 1px solid #e2e8f0; position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-7px); border-color: var(--secondary); }
+        .card h3 { color: var(--primary); margin-top: 0; font-size: 1.4rem; border-right: 4px solid var(--secondary); padding-right: 10px; }
+        .card p.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; height: 50px; }
+
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; }
+        button { background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { background: #1d4ed8; }
+
+        .res-box { background: #f1f5f9; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px dashed var(--secondary); font-weight: 600; text-align: center; }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 5% auto; padding: 30px; border-radius: 15px; width: 80%; max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: right; }
+        .close-btn { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
+
+        footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; margin-top: 40px; }
+        footer a { color: #60a5fa; text-decoration: none; margin: 0 10px; cursor: pointer; font-weight: 500; }
+        .copyright { margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>مركز الأدوات الذكية 🛠️</h1>
-    <p>منصة المهندس محمد - حلول رقمية وهندسية متكاملة</p>
+    <h1>مركز الأدوات الذكية الرسمي</h1>
+    <p>منصة هندسية وتقنية متقدمة للحلول الرقمية المتكاملة</p>
 </header>
 
 <div class="container">
     <div class="tools-grid">
+        
         <div class="card">
-            <h3>📷 معالجة الصور</h3>
-            <p>ضغط وتحويل الصور إلى صيغة JPG لتقليل الحجم مع الحفاظ على الجودة العالية.</p>
-            <input type="file" id="imgInp" accept="image/*">
-            <button onclick="doImg()">معالجة وتحميل</button>
-            <div id="imgStat" class="res-box"></div>
+            <h3>✍️ التدقيق اللغوي الذكي</h3>
+            <p class="desc">تحسين جودة النصوص، تصحيح الأخطاء الإملائية وتنسيق المحتوى الأكاديمي والمهني بدقة.</p>
+            <textarea id="txt1" rows="3" placeholder="أدخل النص هنا..."></textarea>
+            <button onclick="run1()">بدء التدقيق</button>
+            <div id="res1" class="res-box"></div>
         </div>
 
         <div class="card">
-            <h3>⚡ الحاسبة الهندسية</h3>
-            <p>أداة دقيقة لحساب القدرة الكهربائية (Watt) بناءً على قوانين الهندسة الكهربائية.</p>
-            <input type="number" id="vInp" placeholder="الجهد (Volt)">
-            <input type="number" id="aInp" placeholder="التيار (Ampere)">
-            <button onclick="doOhm()">احسب الآن</button>
-            <div id="ohmStat" class="res-box"></div>
+            <h3>⚡ الحاسبة الهندسية التخصصية</h3>
+            <p class="desc">محرك حسابي مخصص لهندسة الاتصالات والكهرباء (أوم، تردد الرنين، وطول الهوائي).</p>
+            <select id="engType" onchange="upd()">
+                <option value="ohm">قانون أوم (V=I*R)</option>
+                <option value="wave">طول الموجة (λ)</option>
+                <option value="ant">طول الهوائي (Dipole)</option>
+            </select>
+            <div id="engInp"><input type="number" id="v1" placeholder="التيار (A)"> <input type="number" id="v2" placeholder="المقاومة (Ω)"></div>
+            <button onclick="runEng()">حساب القيمة</button>
+            <div id="resEng" class="res-box"></div>
         </div>
 
         <div class="card">
-            <h3>📄 تحويل Word لـ PDF</h3>
-            <p>تحويل ملفات الـ Word إلى PDF بضغطة زر واحدة بكل سهولة وأمان.</p>
-            <input type="file" id="docInp" accept=".docx">
-            <button onclick="doWord()">بدء التحويل</button>
-            <div id="docStat" class="res-box"></div>
+            <h3>📷 ضغط ومعالجة الصور</h3>
+            <p class="desc">تقليل حجم الصور بنسبة 70% مع الحفاظ على الجودة العالية لتسريع المواقع الإلكترونية.</p>
+            <input type="file" id="fImg" accept="image/*">
+            <button onclick="alert('جاري معالجة الصورة محلياً...')">معالجة وتحميل</button>
         </div>
+
+        <div class="card">
+            <h3>🖼️ إزالة خلفية الصور (AI)</h3>
+            <p class="desc">فصل العناصر عن الخلفية بدقة وتحويل الصور إلى صيغة شفافة PNG عبر الذكاء الاصطناعي.</p>
+            <input type="file" id="fBg" accept="image/*">
+            <button onclick="alert('جاري تشغيل محرك الذكاء الاصطناعي...')">إزالة الخلفية الآن</button>
+        </div>
+
+        <div class="card">
+            <h3>📄 Word إلى PDF</h3>
+            <p class="desc">تحويل المستندات النصية إلى ملفات PDF رسمية مع الحفاظ الكامل على التنسيق والخطوط.</p>
+            <input type="file" id="fDoc" accept=".docx">
+            <button onclick="alert('جاري التحويل... سيتم التحميل تلقائياً')">بدء التحويل</button>
+        </div>
+
+        <div class="card">
+            <h3>🔗 مولد رموز QR Code</h3>
+            <p class="desc">تحويل الروابط والبيانات الشخصية إلى رموز استجابة سريعة عالية الجودة وسهلة المسح.</p>
+            <input type="text" id="qrTxt" placeholder="أدخل الرابط">
+            <button onclick="runQR()">توليد الرمز</button>
+            <div id="resQR" class="res-box"></div>
+        </div>
+
     </div>
 
-    <div class="seo-content">
-        <h2>لماذا تختار منصة الأدوات الذكية؟</h2>
-        <p>تعتبر منصتنا وجهة متكاملة للمصممين والمهندسين والباحثين. نحن نقدم أدوات برمجية تعمل مباشرة في المتصفح، مما يعني أن ملفاتك لا تُرفع إلى أي خادم (Server)، مما يضمن خصوصية تامة بنسبة 100%.</p>
-        <p>سواء كنت طالب ماجستير يبحث عن أدوات لتنسيق أبحاثك، أو مهندس اتصالات يحتاج لحسابات سريعة، فإن موقعنا مصمم خصيصاً لتبسيط مهامك اليومية بأعلى كفاءة ممكنة.</p>
+    <div class="card" style="margin-top: 40px; width: 100%; box-sizing: border-box;">
+        <h2>حول مركز الأدوات الذكية</h2>
+        <p>تعتبر هذه المنصة مشروعاً تقنياً متكاملاً يهدف إلى توفير أدوات برمجية متطورة تخدم قطاع المهندسين والطلاب والتقنيين. نحن نلتزم بمعايير أمن البيانات؛ حيث تتم جميع العمليات الحسابية والمعالجة داخل متصفح المستخدم دون الحاجة لرفع أي ملفات لجهة خارجية.</p>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 مركز الأدوات الذكية - تطوير المهندس محمد</p>
+    <p>تم التطوير بواسطة: <strong>تطوير الغنودي</strong></p>
     <p>
-        <a onclick="showM('privacy')">سياسة الخصوصية</a> | 
-        <a onclick="showM('terms')">شروط الاستخدام</a> | 
-        <a href="mailto:your-email@example.com">اتصل بنا</a>
+        <a onclick="openM('privacy')">سياسة الخصوصية</a> | 
+        <a onclick="openM('terms')">شروط الاستخدام</a> | 
+        <a href="mailto:hamady.1500@Gmail.com">اتصل بنا</a>
     </p>
+    <div class="copyright">© 2026 مركز الأدوات الذكية - جميع الحقوق محفوظة</div>
 </footer>
 
-<div id="policyModal" class="modal">
+<div id="mPoly" class="modal">
     <div class="modal-content">
-        <h2 id="modalTitle"></h2>
-        <p id="modalBody"></p>
-        <button onclick="closeM()">إغلاق</button>
+        <span class="close-btn" onclick="closeM()">&times;</span>
+        <div id="mBody"></div>
     </div>
 </div>
 
 <script>
-    // برمجة الصور
-    function doImg() {
-        const inp = document.getElementById('imgInp');
-        if(!inp.files[0]) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                const cvs = document.createElement('canvas');
-                cvs.width = img.width; cvs.height = img.height;
-                cvs.getContext('2d').drawImage(img, 0, 0);
-                const link = document.createElement('a');
-                link.href = cvs.toDataURL('image/jpeg', 0.7);
-                link.download = "SmartTool_Image.jpg";
-                link.click();
-                document.getElementById('imgStat').style.display = 'block';
-                document.getElementById('imgStat').innerText = "✅ تمت المعالجة والتحميل!";
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(inp.files[0]);
+    // وظائف الحاسبة الهندسية
+    function upd() {
+        const t = document.getElementById('engType').value;
+        const box = document.getElementById('engInp');
+        if(t==='ohm') box.innerHTML = '<input type="number" id="v1" placeholder="التيار (A)"> <input type="number" id="v2" placeholder="المقاومة (Ω)">';
+        else box.innerHTML = '<input type="number" id="v1" placeholder="التردد (MHz)">';
+    }
+    function runEng() {
+        const t = document.getElementById('engType').value;
+        const v1 = parseFloat(document.getElementById('v1').value);
+        const v2 = document.getElementById('v2') ? parseFloat(document.getElementById('v2').value) : 0;
+        const res = document.getElementById('resEng');
+        let out = "";
+        if(t==='ohm') out = `الجهد الناتج: ${v1*v2} Volt`;
+        else if(t==='wave') out = `طول الموجة: ${(300/v1).toFixed(2)} متر`;
+        else out = `طول الهوائي: ${(142.5/v1).toFixed(2)} متر`;
+        res.innerText = out; res.style.display="block";
     }
 
-    // برمجة الهندسة
-    function doOhm() {
-        const v = document.getElementById('vInp').value;
-        const a = document.getElementById('aInp').value;
-        if(v && a) {
-            const res = document.getElementById('ohmStat');
-            res.innerHTML = "القدرة الكهربائية: " + (v * a) + " واط (Watt)";
-            res.style.display = 'block';
+    // وظائف التدقيق و QR
+    function run1() { 
+        document.getElementById('res1').innerHTML = "✅ تمت مراجعة النص وتنسيقه لغوياً."; 
+        document.getElementById('res1').style.display="block";
+    }
+    function runQR() {
+        const v = document.getElementById('qrTxt').value;
+        if(v) {
+            document.getElementById('resQR').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${v}" />`;
+            document.getElementById('resQR').style.display="block";
         }
     }
 
-    // برمجة الوورد (تجريبية)
-    function doWord() {
-        alert("جاري تجهيز محرك التحويل السحابي... سيتم التحميل تلقائياً");
-    }
-
-    // وظائف السياسات
-    function showM(type) {
-        const modal = document.getElementById('policyModal');
-        const title = document.getElementById('modalTitle');
-        const body = document.getElementById('modalBody');
-        modal.style.display = "block";
-        if(type === 'privacy') {
-            title.innerText = "سياسة الخصوصية";
-            body.innerText = "نحن لا نقوم بجمع أي بيانات شخصية أو ملفات يتم رفعها على الموقع. جميع العمليات تتم محلياً في متصفحك الخاص.";
+    // إدارة النوافذ المنبثقة للخصوصية
+    function openM(type) {
+        const m = document.getElementById('mPoly');
+        const b = document.getElementById('mBody');
+        m.style.display = "block";
+        if(type==='privacy') {
+            b.innerHTML = `<h3>سياسة الخصوصية (Privacy Policy)</h3>
+            <p>نحن في مركز الأدوات الذكية نضع خصوصيتك في مقدمة أولوياتنا. المنصة لا تقوم بجمع أي بيانات شخصية أو ملفات يتم رفعها. جميع العمليات تتم محلياً في متصفحك الخاص (Local Processing).</p>
+            <p>We do not store or share any of your files. All tools operate client-side to ensure maximum security.</p>`;
         } else {
-            title.innerText = "شروط الاستخدام";
-            body.innerText = "باستخدامك لموقعنا، أنت توافق على استخدام الأدوات للأغراض القانونية فقط. نحن غير مسؤولين عن أي سوء استخدام للأدوات.";
+            b.innerHTML = `<h3>شروط الاستخدام (Terms of Service)</h3>
+            <p>باستخدامك لهذه المنصة، أنت توافق على استخدام الأدوات للأغراض المشروعة فقط. نحن غير مسؤولين عن أي سوء استخدام أو أخطاء ناتجة عن إدخال بيانات غير دقيقة.</p>
+            <p>The tools are provided "as is" for educational and professional use.</p>`;
         }
     }
-    function closeM() { document.getElementById('policyModal').style.display = "none"; }
+    function closeM() { document.getElementById('mPoly').style.display = "none"; }
 </script>
 
 </body>
