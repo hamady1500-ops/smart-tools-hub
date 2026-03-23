@@ -3,48 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة المِعيار للحلول الذكية | أدوات تقنية وهندسية شاملة</title>
+    <title>منصة المِعيار للحلول الذكية | 13 أداة احترافية</title>
     
-    <meta name="description" content="منصة المِعيار: المركز الأول للأدوات الذكية، تشمل أدوات هندسية، تحويل ملفات، تدقيق لغوي، وحسابات مالية وصحية دقيقة.">
-    <meta name="author" content="مركز المِعيار">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --warn: #f59e0b; --bg: #f8fafc; --w: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; line-height: 1.6; }
-        
-        header { background: linear-gradient(135deg, var(--p) 0%, #1e293b 100%); color: white; padding: 60px 20px; text-align: center; border-bottom: 5px solid var(--s); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        header h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
-        header p { opacity: 0.9; margin-top: 10px; font-size: 1.1rem; }
-
-        .container { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        
-        .card { background: var(--w); padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: 0.3s ease; position: relative; }
-        .card:hover { transform: translateY(-7px); border-color: var(--s); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .card h3 { color: var(--p); margin-top: 0; font-size: 1.35rem; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
-        .tag { position: absolute; top: 15px; left: 15px; font-size: 0.75rem; background: #e2e8f0; padding: 3px 10px; border-radius: 20px; color: var(--s); font-weight: bold; }
-
-        input, select, textarea { width: 100%; padding: 13px; margin: 10px 0; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 15px; box-sizing: border-box; transition: 0.2s; }
-        input:focus { border-color: var(--s); outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        
-        button { background: var(--s); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1.05rem; transition: 0.2s; }
-        button:hover { filter: brightness(1.1); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        :root { --p: #0f172a; --s: #2563eb; --sc: #10b981; --bg: #f1f5f9; --w: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; color: #334155; }
+        header { background: linear-gradient(135deg, var(--p) 0%, #1e293b 100%); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--s); }
+        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--w); padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: var(--s); }
+        .card h3 { color: var(--p); margin-top: 0; font-size: 1.25rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        .tag { position: absolute; top: 10px; left: 10px; font-size: 0.7rem; background: #f1f5f9; padding: 2px 8px; border-radius: 10px; color: var(--s); font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; }
+        button { background: var(--s); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { filter: brightness(1.1); }
         .btn-sc { background: var(--sc); }
-
-        .res { background: #f8fafc; padding: 18px; border-radius: 10px; display: none; margin-top: 15px; border: 1px dashed var(--s); text-align: center; font-weight: 600; color: var(--p); }
+        .res { background: #f8fafc; padding: 15px; border-radius: 8px; display: none; margin-top: 10px; border: 1px dashed var(--s); text-align: center; font-weight: 600; }
+        footer { background: var(--p); color: white; padding: 40px; text-align: center; margin-top: 60px; }
         
-        footer { background: var(--p); color: white; padding: 50px 20px; text-align: center; margin-top: 80px; }
-        footer a { color: #60a5fa; text-decoration: none; font-weight: bold; cursor: pointer; }
-        .copy { margin-top: 25px; opacity: 0.6; font-size: 0.9rem; }
+        /* منطقة المعالجة المخفية للـ PDF لدعم العربية */
+        #pdf-render { width: 700px; padding: 50px; background: white; color: black; position: absolute; left: -9999px; text-align: right; direction: rtl; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>مركز المِعيار للأدوات الذكية</h1>
-    <p>بوابتك المتكاملة للحلول التقنية، الهندسية، والخدمات اليومية</p>
+    <p>المنصة الشاملة: 13 أداة تعمل بدقة وسرعة مع دعم كامل للغة العربية</p>
 </header>
 
 <div class="container">
@@ -52,73 +40,100 @@
         
         <div class="card">
             <span class="tag">مهني</span>
-            <h3>📄 صانع السيرة الذاتية</h3>
+            <h3>📄 صانع CV احترافي</h3>
             <input type="text" id="cvName" placeholder="الاسم الكامل">
             <input type="text" id="cvJob" placeholder="المسمى الوظيفي">
-            <textarea id="cvExp" rows="3" placeholder="نبذة عن خبراتك..."></textarea>
-            <button onclick="makeCV()">تحميل ملف CV (PDF)</button>
-            <div id="cvRes" class="res"></div>
+            <textarea id="cvExp" placeholder="الخبرات والنبذة الشخصية..."></textarea>
+            <button onclick="saveCV()">تحميل السيرة الذاتية PDF</button>
+        </div>
+
+        <div class="card">
+            <span class="tag">ملفات</span>
+            <h3>📄 محول النصوص إلى PDF</h3>
+            <textarea id="txtToPdfIn" placeholder="اكتب موضوعك باللغة العربية هنا..."></textarea>
+            <button onclick="saveTxtPDF()" class="btn-sc">حفظ كملف PDF</button>
+        </div>
+
+        <div class="card">
+            <span class="tag">ملفات</span>
+            <h3>🖼️ تحويل صورة إلى PDF</h3>
+            <input type="file" id="imgToPdfIn" accept="image/*">
+            <button onclick="saveImgPDF()">تحويل وتحميل PDF</button>
         </div>
 
         <div class="card">
             <span class="tag">صحة</span>
             <h3>⚖️ حاسبة كتلة الجسم (BMI)</h3>
-            <input type="number" id="bmiW" placeholder="الوزن بالـ (كجم)">
-            <input type="number" id="bmiH" placeholder="الطول بالـ (سم)">
-            <button onclick="calcBMI()" class="btn-sc">تحليل الحالة الصحية</button>
+            <input type="number" id="bmiW" placeholder="الوزن (كجم)">
+            <input type="number" id="bmiH" placeholder="الطول (سم)">
+            <button onclick="calcBMI()" class="btn-sc">فحص الحالة</button>
             <div id="bmiRes" class="res"></div>
         </div>
 
         <div class="card">
+            <span class="tag">مالي</span>
+            <h3>💰 حاسبة القروض والتقسيط</h3>
+            <input type="number" id="loanA" placeholder="قيمة القرض">
+            <input type="number" id="loanR" placeholder="الفائدة %">
+            <input type="number" id="loanT" placeholder="المدة (شهور)">
+            <button onclick="calcLoan()">حساب القسط</button>
+            <div id="loanRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">أدوات</span>
+            <h3>📝 عداد الكلمات والحروف</h3>
+            <textarea id="wordIn" placeholder="الصق النص هنا..." oninput="countWords()"></textarea>
+            <div id="wordRes" class="res" style="display:block; border:none; background:none;">الحروف: 0 | الكلمات: 0</div>
+        </div>
+
+        <div class="card">
+            <span class="tag">أمان</span>
+            <h3>🔒 مولد كلمات سر قوية</h3>
+            <button onclick="genPass()">توليد كلمة سر</button>
+            <div id="passRes" class="res"></div>
+        </div>
+
+        <div class="card">
             <span class="tag">تقني</span>
-            <h3>🔗 مولد رموز QR للروابط</h3>
-            <input type="text" id="qrIn" placeholder="أدخل الرابط هنا (URL)">
-            <button onclick="doQR()">توليد الرمز فورا</button>
+            <h3>🔗 محول الرابط لـ QR</h3>
+            <input type="text" id="qrIn" placeholder="ضع الرابط هنا">
+            <button onclick="doQR()" class="btn-sc">توليد الرمز</button>
             <div id="qrRes" class="res"></div>
         </div>
 
         <div class="card">
             <span class="tag">وسائط</span>
-            <h3>📷 معالج وضغاط الصور</h3>
+            <h3>📷 ضاغط الصور الاحترافي</h3>
             <input type="file" id="compIn" accept="image/*">
-            <button onclick="doComp()" class="btn-sc">ضغط وتحميل الصورة</button>
+            <button onclick="doComp()">ضغط وتحميل</button>
             <div id="compRes" class="res"></div>
+        </div>
+
+        <div class="card">
+            <span class="tag">مالي</span>
+            <h3>💱 محول العملات (ليبيا)</h3>
+            <input type="number" id="currVal" placeholder="المبلغ">
+            <select id="currF"><option value="USD">دولار</option><option value="LYD">دينار</option></select>
+            <button onclick="doCurr()" class="btn-sc">تحويل فوري</button>
+            <div id="currRes" class="res"></div>
         </div>
 
         <div class="card">
             <span class="tag">لغة</span>
             <h3>✍️ المدقق اللغوي الذكي</h3>
-            <textarea id="gramIn" rows="4" placeholder="أدخل النص العربي المراد تدقيقه..."></textarea>
-            <button onclick="doGrammar()">تحسين وتنسيق النص</button>
+            <textarea id="gramIn" placeholder="أدخل النص العربي..."></textarea>
+            <button onclick="doGrammar()">تدقيق وتنسيق</button>
             <div id="gramRes" class="res" style="text-align:right"></div>
         </div>
 
         <div class="card">
-            <span class="tag">مالي</span>
-            <h3>💰 حاسبة القروض والتمويل</h3>
-            <input type="number" id="loanA" placeholder="مبلغ القرض">
-            <input type="number" id="loanR" placeholder="نسبة الفائدة %">
-            <input type="number" id="loanT" placeholder="عدد الأشهر">
-            <button onclick="calcLoan()">حساب القسط الشهري</button>
-            <div id="loanRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">مالي</span>
-            <h3>💱 محول العملات العالمي</h3>
-            <input type="number" id="currVal" placeholder="المبلغ">
-            <select id="currF"><option value="USD">دولار أمريكي</option><option value="LYD">دينار ليبي</option><option value="EUR">يورو</option></select>
-            <button onclick="doCurr()" class="btn-sc">تحويل القيمة</button>
-            <div id="currRes" class="res"></div>
-        </div>
-
-        <div class="card">
             <span class="tag">هندسة</span>
-            <h3>⚡ محرك الحسابات الهندسية</h3>
-            <select id="engM"><option value="o">قانون أوم (الجهد V)</option><option value="w">طول الموجة (λ)</option></select>
-            <input type="number" id="ev1" placeholder="القيمة الأولى">
-            <input type="number" id="ev2" placeholder="القيمة الثانية">
-            <button onclick="doEng()">احسب النتيجة</button>
+            <h3>⚡ الحاسبة الهندسية</h3>
+            <select id="engM"><option value="o">قانون أوم</option><option value="w">طول الموجة</option></select>
+            <input type="number" id="ev1" placeholder="القيمة 1">
+            <input type="number" id="ev2" placeholder="القيمة 2">
+            <button onclick="doEng()" class="btn-sc">حساب النتيجة</button>
             <div id="engRes" class="res"></div>
         </div>
 
@@ -126,126 +141,96 @@
             <span class="tag">تعليم</span>
             <h3>🎓 حاسبة المعدل GPA</h3>
             <input type="number" id="gpaS" placeholder="مجموع النقاط">
-            <input type="number" id="gpaH" placeholder="عدد الساعات الكلي">
-            <button onclick="doGPA()" class="btn-sc">حساب التقدير</button>
+            <input type="number" id="gpaH" placeholder="إجمالي الساعات">
+            <button onclick="doGPA()">حساب المعدل</button>
             <div id="gpaRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">ملفات</span>
-            <h3>📄 محول النصوص لـ PDF</h3>
-            <textarea id="txtToPdfIn" rows="4" placeholder="اكتب النص هنا لتحويله لمستند..."></textarea>
-            <button onclick="txtToPdf()">حفظ كملف PDF</button>
-            <div id="tpdfRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">أدوات</span>
-            <h3>📝 تحليل وإحصاء النصوص</h3>
-            <textarea id="wordIn" placeholder="الصق النص هنا..." oninput="countWords()"></textarea>
-            <div id="wordRes" class="res" style="display:block; border:none; background:none; font-size: 0.9rem;">الحروف: 0 | الكلمات: 0</div>
-        </div>
-
-        <div class="card">
-            <span class="tag">أمان</span>
-            <h3>🔒 مولد كلمات مرور آمنة</h3>
-            <button onclick="genPass()">توليد كلمة سر معقدة</button>
-            <div id="passRes" class="res"></div>
-        </div>
-
-        <div class="card">
-            <span class="tag">ملفات</span>
-            <h3>🖼️ تحويل الصور لمستند PDF</h3>
-            <input type="file" id="imgToPdfIn" accept="image/*">
-            <button onclick="imgToPdf()" class="btn-sc">تحويل وتحميل المستند</button>
-            <div id="itpRes" class="res"></div>
         </div>
 
     </div>
 </div>
 
+<div id="pdf-render">
+    <h2 id="p-title" style="text-align:center; border-bottom: 2px solid #000; padding-bottom:10px;"></h2>
+    <div id="p-body" style="font-size:18px; margin-top:20px; white-space: pre-wrap;"></div>
+</div>
+
 <footer>
-    <p>جميع الحقوق محفوظة لصالح <strong>منصة المِعيار الرقمية</strong></p>
-    <p>
-        <a onclick="alert('خصوصية المِعيار: جميع العمليات تتم محلياً في متصفحك لضمان أقصى درجات الأمان.')">سياسة الخصوصية</a> | 
-        <a href="mailto:hamady.1500@Gmail.com">الدعم الفني والاتصال</a>
-    </p>
-    <div class="copy">© 2026 مركز المِعيار للحلول الذكية - درنة، ليبيا</div>
+    <p>منصة المِعيار - تطوير المهندس <strong>محمد الغنودي</strong></p>
+    <div style="opacity:0.6; font-size:13px;">© 2026 مركز المِعيار للحلول الذكية - درنة، ليبيا</div>
 </footer>
 
 <canvas id="cvs" style="display:none;"></canvas>
 
 <script>
-    const { jsPDF } = window.jspdf;
+    // وظيفة التحميل لـ PDF تدعم العربية
+    async function downloadAsPDF(title, content, fileName) {
+        document.getElementById('p-title').innerText = title;
+        document.getElementById('p-body').innerText = content;
+        const element = document.getElementById('pdf-render');
+        const opt = { margin: 15, filename: fileName, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+        await html2pdf().set(opt).from(element).save();
+    }
 
-    function makeCV() {
-        const doc = new jsPDF();
+    function saveCV() {
         const n = document.getElementById('cvName').value;
         const j = document.getElementById('cvJob').value;
         const e = document.getElementById('cvExp').value;
-        if(!n) return alert("يرجى إدخال الاسم");
-        doc.text(`Curriculum Vitae\nName: ${n}\nJob Title: ${j}\nSummary: ${e}`, 10, 20);
-        doc.save("Almiyar_CV.pdf");
-        document.getElementById('cvRes').innerHTML = "✅ تم تحميل السيرة الذاتية بنجاح";
-        document.getElementById('cvRes').style.display="block";
+        if(!n) return alert("أدخل الاسم");
+        downloadAsPDF("السيرة الذاتية", `الاسم: ${n}\nالوظيفة: ${j}\n\nالخبرات:\n${e}`, "Almiyar_CV.pdf");
+    }
+
+    function saveTxtPDF() {
+        const t = document.getElementById('txtToPdfIn').value;
+        if(!t) return alert("أدخل نصاً");
+        downloadAsPDF("مستند نصي", t, "Almiyar_Document.pdf");
+    }
+
+    function saveImgPDF() {
+        const f = document.getElementById('imgToPdfIn').files[0];
+        const r = new FileReader();
+        r.onload = (e) => {
+            const html = `<div style="text-align:center"><img src="${e.target.result}" style="max-width:100%"></div>`;
+            html2pdf().from(html).save("Almiyar_Image.pdf");
+        };
+        r.readAsDataURL(f);
     }
 
     function calcBMI() {
         const w = parseFloat(document.getElementById('bmiW').value);
         const h = parseFloat(document.getElementById('bmiH').value)/100;
-        if(!w || !h) return;
         const bmi = (w/(h*h)).toFixed(1);
-        let msg = bmi < 18.5 ? "نقص وزن" : bmi < 25 ? "وزن مثالي" : "زيادة وزن";
-        document.getElementById('bmiRes').innerHTML = `مؤشر الكتلة: ${bmi} (${msg})`;
+        document.getElementById('bmiRes').innerHTML = `الكتلة: ${bmi}`;
         document.getElementById('bmiRes').style.display="block";
-    }
-
-    function imgToPdf() {
-        const file = document.getElementById('imgToPdfIn').files[0];
-        if(!file) return alert("اختر صورة");
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const doc = new jsPDF();
-            doc.addImage(e.target.result, 'JPEG', 10, 10, 190, 170);
-            doc.save("Almiyar_Document.pdf");
-        };
-        reader.readAsDataURL(file);
     }
 
     function calcLoan() {
         const a = parseFloat(document.getElementById('loanA').value);
         const r = parseFloat(document.getElementById('loanR').value)/100/12;
         const t = parseFloat(document.getElementById('loanT').value);
-        if(!a || !r || !t) return;
         const m = (a * r) / (1 - Math.pow(1+r, -t));
-        document.getElementById('loanRes').innerHTML = `القسط الشهري التقريبي: ${m.toFixed(2)}`;
+        document.getElementById('loanRes').innerHTML = `القسط: ${m.toFixed(2)}`;
         document.getElementById('loanRes').style.display="block";
     }
 
     function countWords() {
         const t = document.getElementById('wordIn').value;
-        const words = t.trim() ? t.trim().split(/\s+/).length : 0;
-        document.getElementById('wordRes').innerText = `الحروف: ${t.length} | الكلمات: ${words}`;
+        document.getElementById('wordRes').innerText = `الحروف: ${t.length} | الكلمات: ${t.trim().split(/\s+/).length}`;
     }
 
     function genPass() {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-        let pass = "";
-        for(let i=0; i<12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-        document.getElementById('passRes').innerHTML = `كلمة السر الآمنة: <code style='color:blue'>${pass}</code>`;
+        const p = Math.random().toString(36).slice(-10).toUpperCase();
+        document.getElementById('passRes').innerText = p;
         document.getElementById('passRes').style.display="block";
     }
 
     function doQR() {
         const v = document.getElementById('qrIn').value;
-        if(!v) return;
-        document.getElementById('qrRes').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(v)}" /><br><small>اضغط مطولاً للحفظ</small>`;
+        document.getElementById('qrRes').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${v}" />`;
         document.getElementById('qrRes').style.display="block";
     }
 
     function doComp() {
         const f = document.getElementById('compIn').files[0];
-        if(!f) return;
         const r = new FileReader();
         r.onload = (e) => {
             const img = new Image();
@@ -256,8 +241,8 @@
                 c.toBlob(b => {
                     const u = URL.createObjectURL(b);
                     const l = document.createElement('a');
-                    l.href = u; l.download = "Almiyar_Optimized.jpg"; l.click();
-                }, 'image/jpeg', 0.6);
+                    l.href = u; l.download = "Compressed.jpg"; l.click();
+                }, 'image/jpeg', 0.5);
             };
             img.src = e.target.result;
         };
@@ -265,45 +250,33 @@
     }
 
     function doCurr() {
-        const a = parseFloat(document.getElementById('currVal').value);
+        const a = document.getElementById('currVal').value;
         const f = document.getElementById('currF').value;
-        const rate = 4.88; 
-        let res = f === 'USD' ? a * rate : a / rate;
-        document.getElementById('currRes').innerHTML = `النتيجة التقديرية: ${res.toFixed(2)}`;
+        const res = f === 'USD' ? a * 4.88 : a / 4.88;
+        document.getElementById('currRes').innerText = res.toFixed(2);
         document.getElementById('currRes').style.display="block";
     }
 
     function doGrammar() {
         const t = document.getElementById('gramIn').value;
-        if(!t) return;
-        const c = t.trim().replace(/\s+/g, ' ').replace(/ ,/g, '،').replace(/ \./g, '.');
-        document.getElementById('gramRes').innerHTML = `<b>النص المنسق:</b><br>${c}`;
+        document.getElementById('gramRes').innerText = t.trim().replace(/\s+/g, ' ');
         document.getElementById('gramRes').style.display="block";
     }
 
     function doEng() {
         const m = document.getElementById('engM').value;
         const v1 = parseFloat(document.getElementById('ev1').value);
-        const v2 = parseFloat(document.getElementById('ev2').value) || 0;
+        const v2 = parseFloat(document.getElementById('ev2').value);
         let r = m === 'o' ? v1 * v2 : 300 / v1;
-        document.getElementById('engRes').innerHTML = `النتيجة الهندسية: ${r.toFixed(3)}`;
+        document.getElementById('engRes').innerText = r.toFixed(2);
         document.getElementById('engRes').style.display="block";
     }
 
     function doGPA() {
-        const s = parseFloat(document.getElementById('gpaS').value);
-        const h = parseFloat(document.getElementById('gpaH').value);
-        if(!s || !h) return;
-        document.getElementById('gpaRes').innerHTML = `المعدل المحسوب: ${(s/h).toFixed(2)}`;
+        const s = document.getElementById('gpaS').value;
+        const h = document.getElementById('gpaH').value;
+        document.getElementById('gpaRes').innerText = (s/h).toFixed(2);
         document.getElementById('gpaRes').style.display="block";
-    }
-
-    function txtToPdf() {
-        const doc = new jsPDF();
-        const t = document.getElementById('txtToPdfIn').value;
-        if(!t) return;
-        doc.text(t, 10, 20);
-        doc.save("Almiyar_Text.pdf");
     }
 </script>
 </body>
