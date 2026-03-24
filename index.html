@@ -15,164 +15,326 @@
         }
 
         body { 
-            font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); 
-            color: var(--txt); margin: 0; padding: 0; overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg); color: var(--txt); margin: 0; 
+            overflow-x: hidden; -webkit-tap-highlight-color: transparent;
         }
 
-        /* الهيدر الاحترافي */
+        /* هيدر احترافي */
         header { 
             background: linear-gradient(135deg, var(--p) 0%, #1e40af 100%); 
-            color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--s);
+            color: white; padding: 40px 20px; text-align: center; 
+            border-bottom: 5px solid var(--s);
         }
 
-        /* شريط التبويبات السلس للموبايل والكمبيوتر */
+        /* شريط تنقل ذكي للموبايل والكمبيوتر */
         .nav-tabs { 
-            display: flex; justify-content: center; background: var(--card); 
-            sticky: top; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow-x: auto; padding: 10px;
+            display: flex; justify-content: center; gap: 8px; 
+            background: var(--card); padding: 12px; 
+            position: sticky; top: 0; z-index: 1000; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            overflow-x: auto; white-space: nowrap;
         }
-        .nav-tabs::-webkit-scrollbar { display: none; }
 
         .tab-btn { 
-            padding: 12px 20px; border: none; background: none; font-weight: bold;
-            cursor: pointer; color: var(--txt); transition: 0.3s; white-space: nowrap;
-            display: flex; align-items: center; gap: 8px; border-radius: 12px; margin: 0 5px;
+            background: #f8fafc; border: 1px solid var(--border); 
+            color: var(--txt); padding: 10px 20px; border-radius: 30px; 
+            cursor: pointer; font-weight: 600; transition: 0.3s; 
+            display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
         }
-        .tab-btn.active { background: var(--s); color: white; }
 
-        .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
+        .tab-btn.active { background: var(--s); color: white; border-color: var(--s); }
 
-        /* شبكة الأدوات الاستجابية */
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+        .tab-content { display: none; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+        /* شبكة الأدوات */
         .tools-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
         }
 
         .card { 
             background: var(--card); padding: 25px; border-radius: 20px; 
-            border: 1px solid var(--border); transition: 0.3s; display: flex; flex-direction: column;
+            border: 1px solid var(--border); transition: 0.3s;
+            display: flex; flex-direction: column; position: relative;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
 
-        h3 { color: var(--s); margin-top: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-        
+        h3 { color: var(--s); font-size: 1.15rem; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; }
+
         input, select, textarea { 
-            width: 100%; padding: 14px; margin: 10px 0; border-radius: 10px;
-            border: 1px solid var(--border); background: #f8fafc; font-size: 16px; box-sizing: border-box;
+            width: 100%; padding: 12px; margin: 10px 0; 
+            border-radius: 10px; border: 1px solid var(--border); 
+            background: #f8fafc; font-size: 16px; box-sizing: border-box;
         }
 
         button { 
-            background: var(--s); color: white; border: none; padding: 15px; 
-            border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s;
+            background: var(--s); color: white; border: none; 
+            padding: 15px; border-radius: 10px; font-weight: bold; 
+            cursor: pointer; transition: 0.2s; width: 100%; margin-top: 10px;
         }
         button:hover { background: #1d4ed8; }
 
-        .result-box { 
-            display: none; margin-top: 15px; padding: 15px; border-radius: 10px;
-            background: #ecfdf5; border: 1px solid var(--sc); color: #065f46; font-weight: bold; text-align: center;
+        .res { 
+            display: none; margin-top: 20px; padding: 15px; 
+            border-radius: 10px; background: #f0f9ff; 
+            border: 1px dashed var(--s); color: var(--p); font-weight: bold;
         }
 
-        .source { font-size: 0.7rem; color: #94a3b8; margin-top: auto; padding-top: 15px; text-decoration: none; }
-        .source i { color: var(--sc); }
+        .source-link { 
+            font-size: 0.75rem; color: #94a3b8; margin-top: auto; 
+            padding-top: 15px; text-decoration: none; display: block;
+        }
+        .source-link:hover { color: var(--s); }
+
+        footer { background: var(--p); color: white; padding: 40px; text-align: center; margin-top: 60px; }
 
         /* منطقة الـ CV المخفية */
-        #cv-master-template { position: absolute; left: -9999px; width: 210mm; background: white; padding: 40px; }
+        #cv-output { position: absolute; left: -9999px; width: 210mm; min-height: 297mm; background: white; color: #333; }
 
         @media (max-width: 768px) {
             .nav-tabs { justify-content: flex-start; }
-            header h1 { font-size: 1.6rem; }
             .tools-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>مِنصة المِعيار الذكية</h1>
-    <p>بوابة الحلول التقنية والهندسية</p>
+    <h1 style="margin:0;">منصة المِعيار الذكية</h1>
+    <p style="opacity:0.9;">بوابة الأدوات الهندسية والخدمية الشاملة |   </p>
 </header>
 
 <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="showTab('general')"><i class="fas fa-th"></i> أدوات عامة</button>
-    <button class="tab-btn" onclick="showTab('engineering')"><i class="fas fa-bolt"></i> هندسة وطاقة</button>
-    <button class="tab-btn" onclick="showTab('academic')"><i class="fas fa-graduation-cap"></i> أكاديميا</button>
-    <button class="tab-btn" onclick="showTab('about')"><i class="fas fa-info-circle"></i> من نحن</button>
+    <button class="tab-btn active" onclick="openTab(event, 'general')"><i class="fas fa-th-large"></i> أدوات عامة</button>
+    <button class="tab-btn" onclick="event, openTab(event, 'engineering')"><i class="fas fa-microchip"></i> هندسة وتقنية</button>
+    <button class="tab-btn" onclick="openTab(event, 'about')"><i class="fas fa-info-circle"></i> من نحن</button>
 </nav>
 
 <div class="container">
 
     <div id="general" class="tab-content" style="display: block;">
         <div class="tools-grid">
+            
             <div class="card">
                 <h3><i class="fas fa-file-pdf"></i> صانع الـ CV الاحترافي</h3>
                 <input type="text" id="name" placeholder="الاسم الكامل">
-                <input type="text" id="jobTitle" placeholder="التخصص المهني">
-                <textarea id="experience" rows="3" placeholder="الخبرات، المهارات، والدورات..."></textarea>
-                <button onclick="makePDF()">تحميل PDF (نظام ATS)</button>
-                <a href="https://hbr.org" class="source"><i class="fas fa-shield-alt"></i> معيار: Harvard Business Review</a>
+                <input type="text" id="job" placeholder="التخصص (مثلاً: مهندس كهرباء)">
+                <textarea id="exp" rows="3" placeholder="الخبرات، المهارات، والدورات..."></textarea>
+                <button onclick="makePDF()">تحميل بصيغة PDF</button>
+                <a href="https://hbr.org/2022/11/how-to-write-a-resume-that-stands-out" target="_blank" class="source-link"><i class="fas fa-link"></i> معيار Harvard العالمي</a>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-hand-holding-heart"></i> حاسبة الزكاة الشرعية</h3>
-                <input type="number" id="gPrice" placeholder="سعر جرام الذهب عيار 24">
-                <input type="number" id="gWeight" placeholder="الوزن الإجمالي للذهب">
-                <button onclick="runZakat()">احسب الزكاة</button>
-                <div id="zRes" class="result-box"></div>
-                <a href="https://ifta.ly" class="source"><i class="fas fa-check-circle"></i> المرجع: دار الإفتاء الليبية</a>
+                <h3><i class="fas fa-coins"></i> حاسبة الزكاة الشرعية</h3>
+                <input type="number" id="gP" placeholder="سعر الذهب اليوم (عيار 24)">
+                <input type="number" id="gW" placeholder="وزن الذهب أو المبلغ النقدي">
+                <button onclick="doZakat()">حساب الزكاة</button>
+                <div id="zRes" class="res"></div>
+                <a href="https://ifta.ly" target="_blank" class="source-link"><i class="fas fa-link"></i> دار الإفتاء الليبية</a>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-money-bill-wave"></i> محول العملات (الموازي)</h3>
-                <input type="number" id="cash" placeholder="المبلغ">
-                <input type="number" id="exRate" placeholder="سعر الصرف اليوم">
-                <button onclick="runCurr()">تحويل النتيجة</button>
-                <div id="currRes" class="result-box"></div>
+                <h3><i class="fas fa-users"></i> حاسبة الميراث التقديرية</h3>
+                <input type="number" id="money" placeholder="إجمالي مبلغ التركة">
+                <select id="heirs">
+                    <option value="1">حصر ورثة بسيط (أبناء وبنات)</option>
+                    <option value="2">وجود زوجة وأبناء</option>
+                </select>
+                <button onclick="doHeritage()">توزيع أولي</button>
+                <div id="hRes" class="res"></div>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-heartbeat"></i> مؤشر كتلة الجسم BMI</h3>
+                <h3><i class="fas fa-heartbeat"></i> حاسبة الصحة (BMI)</h3>
                 <input type="number" id="weight" placeholder="الوزن (كجم)">
                 <input type="number" id="height" placeholder="الطول (سم)">
-                <button onclick="runBMI()">تحليل الحالة الصحية</button>
-                <div id="bmiRes" class="result-box"></div>
-                <a href="https://who.int" class="source"><i class="fas fa-hospital"></i> معيار: منظمة الصحة العالمية</a>
+                <button onclick="doBMI()">تحليل الحالة الصحية</button>
+                <div id="bRes" class="res"></div>
+                <a href="https://www.who.int" target="_blank" class="source-link"><i class="fas fa-link"></i> منظمة الصحة العالمية</a>
+            </div>
+
+             <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> حاسبة العمر الدقيقة</h3>
+                <input type="date" id="birthdate">
+                <button onclick="doAge()">احسب عمري</button>
+                <div id="aRes" class="res"></div>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-calendar-alt"></i> حاسبة العمر الدقيقة</h3>
-                <input type="date" id="birthDate">
-                <button onclick="runAge()">احسب عمرك بالتفصيل</button>
-                <div id="ageRes" class="result-box"></div>
+                <h3><i class="fas fa-dollar-sign"></i> محول العملات (موازي)</h3>
+                <input type="number" id="amt" placeholder="المبلغ">
+                <input type="number" id="rt" placeholder="سعر الصرف">
+                <button onclick="doCurr()">تحويل</button>
+                <div id="cRes" class="res"></div>
             </div>
+
         </div>
     </div>
 
     <div id="engineering" class="tab-content">
         <div class="tools-grid">
+            
             <div class="card">
-                <h3><i class="fas fa-solar-panel"></i> تقدير منظومات الطاقة</h3>
-                <input type="number" id="dailyLoad" placeholder="إجمالي الأحمال (واط/ساعة)">
-                <button onclick="runSolar()">حساب الألواح والبطاريات</button>
-                <div id="solarRes" class="result-box"></div>
-                <a href="https://ieee.org" class="source"><i class="fas fa-microchip"></i> المرجع: IEEE Power Standards</a>
+                <h3><i class="fas fa-sun"></i> هندسة الطاقة الشمسية</h3>
+                <input type="number" id="sLoad" placeholder="إجمالي الحمل بالساعة (Watt)">
+                <button onclick="doSolar()">تقدير المنظومة</button>
+                <div id="sRes" class="res" style="text-align:right; font-size:0.9rem;"></div>
+                <a href="https://globalsolaratlas.info" target="_blank" class="source-link"><i class="fas fa-link"></i> Global Solar Atlas</a>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-wave-square"></i> قانون أوم (الجهد)</h3>
-                <input type="number" id="amp" placeholder="التيار (I)">
-                <input type="number" id="resis" placeholder="المقاومة (R)">
-                <button onclick="runOhm()">احسب الجهد (V)</button>
-                <div id="ohmRes" class="result-box"></div>
+                <h3><i class="fas fa-bolt"></i> حسابات قانون أوم</h3>
+                <input type="number" id="volt" placeholder="الجهد (V)">
+                <input type="number" id="amp" placeholder="التيار (A)">
+                <button onclick="doOhm()">حساب المقاومة والقدرة</button>
+                <div id="oRes" class="res"></div>
+                <a href="https://www.ieee.org" target="_blank" class="source-link"><i class="fas fa-link"></i> معايير IEEE الهندسية</a>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-sync"></i> تحويل (HP) إلى (kW)</h3>
-                <input type="number" id="hpVal" placeholder="القدرة بالحصان">
-                <button onclick="runHP()">تحويل إلى كيلوواط</button>
-                <div id="hpRes" class="result-box"></div>
+                <h3><i class="fas fa-ruler-combined"></i> محول الوحدات</h3>
+                <input type="number" id="uIn" placeholder="القيمة">
+                <select id="uType">
+                    <option value="1">من حصان (HP) إلى كيلوواط (kW)</option>
+                    <option value="2">من بوصة إلى سم</option>
+                </select>
+                <button onclick="doUnit()">تحويل الآن</button>
+                <div id="uRes" class="res"></div>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-bolt"></i> هبوط الجهد (Voltage Drop)</h3>
-                <p style="font-size: 0.8rem;">تقدير أولي للمهندسين</p>
-                <input type="number" id="dist
+                <h3><i class="fas fa-graduation-cap"></i> المعدل التراكمي</h3>
+                <input type="number" id="gpaP" placeholder="مجموع النقاط">
+                <input type="number" id="gpaH" placeholder="عدد الساعات">
+                <button onclick="doGPA()">احسب المعدل</button>
+                <div id="gpaResult" class="res"></div>
+            </div>
+
+             <div class="card">
+                <h3><i class="fas fa-wave-square"></i> تردد الموجة (Telecom)</h3>
+                <input type="number" id="freq" placeholder="التردد بالهرتز (Hz)">
+                <button onclick="doWave()">حساب طول الموجة</button>
+                <div id="wRes" class="res"></div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-calculator"></i> حساب الأقساط والقروض</h3>
+                <input type="number" id="lAmt" placeholder="قيمة القرض">
+                <input type="number" id="lMon" placeholder="المدة بالأشهر">
+                <button onclick="doLoan()">حساب القسط الشهري</button>
+                <div id="lRes" class="res"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="about" class="tab-content">
+        <div class="card" style="max-width:800px; margin:0 auto; text-align:right;">
+            <h2 style="color:var(--s); text-align:center;">من نحن؟</h2>
+            <p><strong>منصة المِعيار:</strong> هي مبادرة تقنية من مدينة درنة، تهدف لتبسيط الأدوات الهندسية والخدمية للمواطن والمهندس الليبي.</p>
+            <p>تعتمد المنصة على معايير دقيقة في الحسابات لضمان أفضل النتائج، مع الحفاظ التام على خصوصية بياناتك.</p>
+            <hr>
+            <p style="text-align:center;"><strong>المطور: المهندس محمد الغنودي</strong></p>
+        </div>
+    </div>
+
+</div>
+
+<div id="cv-output"></div>
+
+<footer>
+    <p>منصة المِعيار الذكية © 2026</p>
+    <p>بصمة مهندس.. رؤية وطن</p>
+</footer>
+
+<script>
+    // نظام التبويبات
+    function openTab(evt, tN) {
+        var i, tc, tb;
+        tc = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tc.length; i++) tc[i].style.display = "none";
+        tb = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tb.length; i++) tb[i].className = tb[i].className.replace(" active", "");
+        document.getElementById(tN).style.display = "block";
+        evt.currentTarget.className += " active";
+        window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    // 1. صناعة الـ CV
+    async function makePDF() {
+        const n = document.getElementById('name').value;
+        const j = document.getElementById('job').value;
+        const e = document.getElementById('exp').value;
+        if(!n) return alert("يرجى كتابة الاسم");
+
+        const out = document.getElementById('cv-output');
+        out.innerHTML = `
+            <div style="padding:40px; border:10px solid #f1f5f9; height:100%;">
+                <h1 style="color:#1e40af; border-bottom:3px solid #1e40af; padding-bottom:10px;">${n}</h1>
+                <h2 style="color:#2563eb;">${j}</h2>
+                <div style="margin-top:30px;">
+                    <h3 style="background:#f1f5f9; padding:10px;">الخبرات والمهارات</h3>
+                    <p style="white-space:pre-wrap; line-height:1.8;">${e}</p>
+                </div>
+                <p style="margin-top:100px; font-size:12px; color:#94a3b8;">تم الاستخراج بواسطة منصة المعيار - م. محمد الغنودي</p>
+            </div>
+        `;
+        const opt = { margin:0, filename: 'AlMiyar_CV.pdf', html2canvas: {scale:2}, jsPDF: {unit:'mm', format:'a4'} };
+        setTimeout(() => { html2pdf().set(opt).from(out).save(); }, 500);
+    }
+
+    // 2. الزكاة
+    function doZakat() {
+        let p = document.getElementById('gP').value, w = document.getElementById('gW').value;
+        let nisab = p * 85;
+        let res = document.getElementById('zRes');
+        res.style.display = "block";
+        if (w*p >= nisab) res.innerText = "الزكاة المستحقة: " + (w*p*0.025).toFixed(2) + " د.ل";
+        else res.innerText = "لم يبلغ النصاب (أقل من " + nisab.toFixed(2) + ")";
+    }
+
+    // 3. BMI
+    function doBMI() {
+        let w = document.getElementById('weight').value, h = document.getElementById('height').value / 100;
+        let bmi = w / (h*h);
+        let msg = bmi < 18.5 ? "نحافة" : bmi < 25 ? "وزن مثالي" : "زيادة وزن";
+        document.getElementById('bRes').innerHTML = `المؤشر: ${bmi.toFixed(1)} (${msg})`;
+        document.getElementById('bRes').style.display = "block";
+    }
+
+    // 4. الطاقة الشمسية
+    function doSolar() {
+        let l = document.getElementById('sLoad').value;
+        let panels = Math.ceil(l / 400 * 1.2);
+        let bats = Math.ceil(l * 2 / 1200);
+        document.getElementById('sRes').innerHTML = `تحتاج تقريباً إلى: <br> - ${panels} ألواح (400W) <br> - ${bats} بطاريات (100Ah/12V)`;
+        document.getElementById('sRes').style.display = "block";
+    }
+
+    // 5. العمر
+    function doAge() {
+        let b = new Date(document.getElementById('birthdate').value);
+        let age = new Date().getFullYear() - b.getFullYear();
+        document.getElementById('aRes').innerText = "عمرك الآن: " + age + " سنة";
+        document.getElementById('aRes').style.display = "block";
+    }
+
+    // دوال إضافية سريعة
+    function doOhm() { 
+        let v = document.getElementById('volt').value, a = document.getElementById('amp').value;
+        document.getElementById('oRes').innerText = `المقاومة: ${(v/a).toFixed(2)} Ω | القدرة: ${v*a} W`;
+        document.getElementById('oRes').style.display = "block";
+    }
+    function doCurr() { 
+        document.getElementById('cRes').innerText = "المبلغ الإجمالي: " + (document.getElementById('amt').value * document.getElementById('rt').value).toFixed(2);
+        document.getElementById('cRes').style.display = "block";
+    }
+</script>
+
+</body>
+</html>
